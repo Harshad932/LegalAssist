@@ -1,0 +1,92 @@
+footer {
+    background-color: #263238;
+    color: #fff;
+    padding: 60px 0 20px;
+  }
+  
+  footer .home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+  
+  .footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  .footer-column p {
+    line-height: 1.6;
+    color: #b0bec5;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-column ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-column ul li a {
+    color: #b0bec5;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .footer-column ul li a:hover {
+    color: #fff;
+  }
+  
+  .copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #b0bec5;
+  }
+
+  /* Add this to your Footer.css file */
+.footer-nav-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  text-align: left;
+  display: inline;
+}
+
+.footer-nav-button:hover {
+  text-decoration: underline;
+}
+
+/* Make sure list items maintain proper spacing */
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+  
+  @media (max-width: 920px) {
+    .footer-content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+    }
+  }

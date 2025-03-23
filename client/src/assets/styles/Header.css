@@ -1,0 +1,130 @@
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  header .home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .logo span {
+    color: #4a6eb5;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .nav-links a:hover {
+    color: #4a6eb5;
+  }
+  
+  .home-btn {
+    background-color: #f5f7fa;
+    color: #4a6eb5;
+    padding: 10px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    margin-left: 15px;
+  }
+  
+  .home-btn:hover {
+    background-color: #e8ecf4;
+  }
+  
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 920px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      flex-direction: column;
+      background-color: white;
+      top: 80px;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+    
+    .nav-links.active {
+      display: flex;
+    }
+    
+    .mobile-menu-btn {
+      display: block;
+    }
+  }
+
+  .nav-button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 0;
+    margin: 0 15px;
+    text-decoration: none;
+  }
+  
+  .nav-button:hover {
+    color: #4a90e2; /* Or whatever accent color you're using */
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 640px) {
+    nav {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 15px 0;
+    }
+    
+    .logo {
+      margin-right: auto;
+    }
+    
+    .home-btn {
+      margin-top: 10px;
+      margin-left: 0;
+      margin-right: 10px;
+    }
+  }

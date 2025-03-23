@@ -1,0 +1,90 @@
+.reset-body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.reset-form-container {
+    
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    height:305px
+}
+
+.reset-form-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.reset-form-group {
+    margin-bottom: 20px;
+}
+
+.reset-label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.reset-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.reset-input:focus {
+    outline: none;
+    border-color: #1a76f3;
+}
+
+.reset-error-message {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+
+.reset-submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1a76f3;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.reset-submit-button:hover {
+    background-color: #155cba;
+}
+
+.reset-forgot-password {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.reset-forgot-password a {
+    color: #1a76f3;
+    text-decoration: none;
+}
+
+.reset-forgot-password a:hover {
+    text-decoration: underline;
+}

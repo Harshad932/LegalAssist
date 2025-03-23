@@ -1,0 +1,378 @@
+/* LlamaChat.css */
+:root {
+  --primary-color: #6b5ce7;
+  --secondary-color: #4b3af8;
+  --text-color: #333;
+  --background-color: #f8f9fa;
+  --chat-background: #ffffff;
+  --user-message-bg: #e9eeff;
+  --bot-message-bg: #f0f2f5;
+  --input-background: #ffffff;
+  --border-color: #e1e4e8;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --active-color: #4430f0;
+  --hover-color: #5448ff;
+  --disabled-color: #b1b5ba;
+  --message-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --container-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  --animation-speed: 0.3s;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+.llama-chat-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.llama-chat-main {
+  width: 100%;
+  max-width: 900px;
+  height: 80vh;
+  background-color: var(--chat-background);
+  border-radius: 18px;
+  box-shadow: var(--container-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  position: relative;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* Header styles */
+.llama-chat-header {
+  padding: 16px 24px;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.llama-chat-title {
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.llama-logo {
+  font-size: 24px;
+  animation: bounce 2s infinite;
+}
+
+.llama-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.llama-current-date {
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
+/* Messages area */
+.llama-chat-messages-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+.llama-chat-messages-area::-webkit-scrollbar {
+  width: 6px;
+}
+
+.llama-chat-messages-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.llama-chat-messages-area::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 6px;
+}
+
+.llama-chat-message {
+  display: flex;
+  gap: 12px;
+  max-width: 85%;
+  animation: fadeIn 0.3s ease-out;
+  transition: transform 0.2s ease;
+}
+
+.llama-message-bot {
+  align-self: flex-start;
+}
+
+.llama-message-user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.llama-message-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.llama-message-user .llama-message-avatar {
+  background-color: var(--secondary-color);
+}
+
+.llama-message-content {
+  padding: 12px 16px;
+  border-radius: 18px;
+  background-color: var(--bot-message-bg);
+  box-shadow: var(--message-shadow);
+  position: relative;
+}
+
+.llama-message-user .llama-message-content {
+  background-color: var(--user-message-bg);
+  border-bottom-right-radius: 4px;
+}
+
+.llama-message-bot .llama-message-content {
+  border-bottom-left-radius: 4px;
+}
+
+.llama-message-content p {
+  margin-bottom: 8px;
+}
+
+.llama-message-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Code blocks in messages */
+.llama-message-content pre {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 12px 0;
+}
+
+.llama-message-content code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9em;
+}
+
+/* Typing animation */
+.llama-message-typing {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: var(--bot-message-bg);
+  border-radius: 18px;
+  border-bottom-left-radius: 4px;
+  box-shadow: var(--message-shadow);
+  width: 70px;
+}
+
+.llama-typing-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  margin: 0 3px;
+  opacity: 0.6;
+  animation: typing 1.4s infinite ease-in-out;
+}
+
+.llama-typing-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.llama-typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.llama-typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Input area */
+.llama-chat-input-container {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--chat-background);
+  position: relative;
+  z-index: 2;
+}
+
+.llama-chat-input-wrapper {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  background-color: var(--input-background);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 8px 8px 8px 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: border-color var(--animation-speed), box-shadow var(--animation-speed);
+}
+
+.llama-chat-input-wrapper:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(107, 92, 231, 0.2);
+}
+
+.llama-chat-textarea {
+  flex-grow: 1;
+  border: none;
+  resize: none;
+  outline: none;
+  padding: 8px 0;
+  max-height: 150px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-color);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.llama-chat-textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.llama-button-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.llama-voice-button,
+.llama-send-button {
+  border: none;
+  background-color: transparent;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color var(--animation-speed), color var(--animation-speed);
+}
+
+.llama-voice-button:hover,
+.llama-send-button:hover {
+  background-color: rgba(107, 92, 231, 0.1);
+  color: var(--hover-color);
+}
+
+.llama-voice-button.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.llama-send-button:disabled {
+  color: var(--disabled-color);
+  cursor: not-allowed;
+}
+
+.llama-footer-text {
+  font-size: 12px;
+  color: #727578;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .llama-chat-main {
+    height: 90vh;
+    width: 100%;
+  }
+
+  .llama-chat-message {
+    max-width: 90%;
+  }
+
+  .llama-chat-header {
+    padding: 14px 16px;
+  }
+
+  .llama-chat-title {
+    font-size: 18px;
+  }
+
+  .llama-current-date {
+    font-size: 12px;
+  }
+
+  .llama-chat-input-container {
+    padding: 12px 16px;
+  }
+}
+

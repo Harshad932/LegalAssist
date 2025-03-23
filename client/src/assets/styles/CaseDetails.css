@@ -1,0 +1,287 @@
+.case-details-container {
+    padding: 60px 0;
+    background-color: #f5f7fa;
+    min-height: calc(100vh - 80px);
+  }
+  
+  .case-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .case-details-header h1 {
+    color: #263238;
+    font-size: 32px;
+    margin: 0;
+  }
+  
+  .status-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  
+  .status-badge.pending {
+    background-color: #ffecb3;
+    color: #bf8c00;
+  }
+  
+  .status-badge.in-progress,
+  .status-badge.in.progress {
+    background-color: #bbdefb;
+    color: #1565c0;
+  }
+  
+  .status-badge.completed,
+  .status-badge.closed {
+    background-color: #c8e6c9;
+    color: #2e7d32;
+  }
+  
+  .case-details-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+  }
+  
+  .case-details-card h2 {
+    color: #4a6eb5;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
+  }
+  
+  .case-details-section {
+    margin-bottom: 30px;
+  }
+  
+  .case-details-section h3 {
+    color: #455a64;
+    font-size: 18px;
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 15px;
+  }
+  
+  .case-details-section h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: #4a6eb5;
+    border-radius: 4px;
+  }
+  
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .detail-label {
+    font-weight: 500;
+    color: #78909c;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .detail-value {
+    font-size: 16px;
+  }
+  
+  .parties-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .party-item {
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f5f7fa;
+  }
+  
+  .party-item h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #4a6eb5;
+  }
+  
+  .party-item p {
+    margin: 0;
+  }
+  
+  .highlight-section {
+    background-color: #e8f5e9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+  }
+  
+  .next-hearing {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .next-hearing p {
+    margin: 0;
+  }
+  
+  .hearings-timeline {
+    position: relative;
+  }
+  
+  .hearings-timeline::before {
+    content: "";
+    position: absolute;
+    left: 45px;  /* Adjusted from 20px */
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #e0e0e0;
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding-left: 90px;  /* Increased from 60px */
+    margin-bottom: 30px;
+  }
+  
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .timeline-date {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #4a6eb5;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    text-align: center;
+    min-width: 40px;
+    width: auto;
+    white-space: normal;
+  }
+  
+  .timeline-content {
+    background-color: #f5f7fa;
+    padding: 15px;
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  .timeline-content h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #455a64;
+  }
+  
+  .judge-remarks {
+    margin: 10px 0;
+    font-style: italic;
+  }
+  
+  .timeline-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+  
+  .timeline-status.completed,
+  .timeline-status.closed {
+    background-color: #c8e6c9;
+    color: #2e7d32;
+  }
+  
+  .timeline-status.scheduled {
+    background-color: #bbdefb;
+    color: #1565c0;
+  }
+  
+  .timeline-status.postponed {
+    background-color: #ffecb3;
+    color: #bf8c00;
+  }
+  
+  .timeline-status.cancelled {
+    background-color: #ffcdd2;
+    color: #c62828;
+  }
+  
+  .case-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+  }
+  
+  .not-found {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+  
+  .not-found h2 {
+    color: #e53935;
+    margin-top: 0;
+  }
+  
+  .no-hearings {
+    text-align: center;
+    color: #78909c;
+    padding: 20px;
+    background-color: #f5f7fa;
+    border-radius: 8px;
+  }
+  
+  @media (max-width: 768px) {
+    .details-grid, 
+    .parties-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .case-details-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    
+      .timeline-item {
+        padding-left: 75px;  /* Adjusted from 45px */
+      }
+      
+      .hearings-timeline::before {
+        left: 37px;
+      }
+
+    
+    .timeline-date {
+      width: 35px;
+      font-size: 11px;
+    }
+  }
