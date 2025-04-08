@@ -15,10 +15,7 @@ export async function analyzeCasePriority(caseText) {
     
     const prompt = `
     You are a legal expert. Classify this case as 'Critical', 'High', 'Medium', or 'Low' priority based on legal severity, urgency, and harm potential.
-    Respond with ONLY the priority level word.
-    
-    Case details: ${caseText}
-    `;
+    Respond with ONLY the priority level word.Case details: ${caseText}`;
     
     const result = await model.generateContent(prompt);
     const response = result.response;

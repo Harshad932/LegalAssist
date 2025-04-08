@@ -250,47 +250,92 @@ app.get("/case/:tokenNumber", async (req, res) => {
     });
 
     app.post('/api/chat', async (req, res) => {
-        try {
-          console.log("Received a request");
-      
-          const { message } = req.body;
-          
-          if (!message) {
-            return res.status(400).json({ error: "Message is required" });
-          }
-      
-          // Attach prompt history as a prefix to the user's new query
-          const combinedMessage = `Prompt History:\n${promptHistory}\nUser Query: ${message}`;
-          console.log("Combined Message:", combinedMessage);
-          
-          const response = await axios.post("https://openrouter.ai/api/v1/chat/completions", {
-            model: "google/gemini-2.0-pro-exp-02-05:free",
-            messages: [
-              { 
-                role: "system", 
-                content: "Your name is Legal Support Chatbot. You are a legal expert specializing in Indian laws. When answering legal questions, always provide information based on Indian laws unless explicitly stated otherwise,always provide relevant 2 to 3 past cases related to prompt."
-              },
-              { role: "user", content: combinedMessage }
-            ],
-          }, {
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`
+      try {
+        console.log("Received a request");
+    
+        const { message } = req.body;
+        
+        if (!message) {
+          return res.status(400).json({ error: "Message is required" });
+        }
+    
+        // Attach prompt history as a prefix to the user's new query
+        const combinedMessage = `Prompt History:\n${promptHistory}\nUser Query: ${message}`;
+        
+        // Define models to try in order (fallback strategy)
+        const models = [
+          "google/gemini-2.0-pro-exp-02-05:free",
+          "google/gemini-pro:free",  // Fallback to standard Gemini Pro
+          "openai/gpt-3.5-turbo:free" // Final fallback to GPT-3.5
+        ];
+        
+        let botResponse = null;
+        let lastError = null;
+        
+        // Try each model until one works
+        for (const model of models) {
+          try {
+            console.log(`Trying model: ${model}`);
+            
+            const response = await axios.post("https://openrouter.ai/api/v1/chat/completions", {
+              model: model,
+              messages: [
+                { 
+                  role: "system", 
+                  content: "Your name is Legal Support Chatbot. You are a legal expert specializing in Indian laws. When answering legal questions, always provide information based on Indian laws unless explicitly stated otherwise,always provide relevant 2 to 3 past cases related to prompt."
+                },
+                { role: "user", content: combinedMessage }
+              ],
+            }, {
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`
+              }
+            });
+            
+            // If we get here, the request succeeded
+            if (response.data && response.data.choices && response.data.choices.length > 0) {
+              botResponse = response.data.choices[0].message?.content || "No content in response.";
+              console.log(`Successfully got response from ${model}`);
+              break; // Exit the loop as we got a successful response
             }
-          });
-          
-          const botResponse = response.data.choices?.[0]?.message?.content || "No response received.";
-          
+          } catch (modelError) {
+            console.error(`Error with model ${model}:`, modelError.response?.data || modelError.message);
+            lastError = modelError;
+            
+            // If it's not a rate limit error, we might want to stop trying
+            if (modelError.response?.status !== 429) {
+              break;
+            }
+            
+            // For rate limit errors, continue to next model after a short delay
+            await new Promise(resolve => setTimeout(resolve, 500));
+          }
+        }
+        
+        if (botResponse) {
           // Update prompt history (only keeping essential context)
           promptHistory += `\nUser: ${message}\nBot: ${botResponse}`;
+          return res.json({ reply: botResponse });
+        } else {
+          // If all models failed, return an appropriate error
+          console.error("All models failed. Last error:", lastError?.response?.data || lastError?.message);
           
-          res.json({ reply: botResponse });
-          
-        } catch (error) {
-          console.error("Chat API error:", error.message);
-          res.status(500).json({ error: "Error processing request" });
+          // Return a user-friendly message
+          return res.status(503).json({ 
+            error: "The service is currently experiencing high demand. Please try again in a few moments.",
+            details: lastError?.response?.data || lastError?.message
+          });
         }
-      });
+        
+      } catch (error) {
+        console.error("Chat API error:", error.response?.data || error.message);
+        res.status(500).json({ 
+          error: "Error processing request",
+          details: error.response?.data || error.message
+        });
+      }
+    });
 
       app.post("/admin/forgotPassword",async (req,res)=>
         {
