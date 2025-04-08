@@ -20,7 +20,7 @@ export default function UserRegistration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/register', formData);
+      const response = await axios.post('http://localhost:4000/api/user/auth/register', formData);
       if (response.data.success) {
         
         navigate('/user/login');

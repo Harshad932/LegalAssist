@@ -12,6 +12,9 @@ import Reset from './components/Reset';
 import UserRegistration from './components/user/userRegistration';
 import UserLogin from './components/user/UserLogin';
 
+import LawyerRegistration from './components/lawyer/LawyerRegistration';
+import LawyerLogin from './components/lawyer/LawyerLogin';
+
 function App() {
   return (
     <Router>
@@ -27,6 +30,9 @@ function App() {
 
         <Route path="/user/registration" element={<UserRegistration/>} />
         <Route path="/user/login" element={<UserLogin/>} />
+
+        <Route path="/lawyer/registration" element={<LawyerRegistration/>} />
+        <Route path="/lawyer/login" element={<LawyerLogin/>} />
       </Routes>
     </Router>
   );
