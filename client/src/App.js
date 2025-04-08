@@ -9,6 +9,9 @@ import Chatbot from './components/LlamaChat';
 import ForgotPassword from './components/ForgotPassword';
 import Reset from './components/Reset';
 
+import UserRegistration from './components/user/userRegistration';
+import UserLogin from './components/user/UserLogin';
+
 function App() {
   return (
     <Router>
@@ -21,6 +24,9 @@ function App() {
         <Route path="/case-details" element={<CaseDetails />} />
         <Route path="/admin/forgot-password" element={<ForgotPassword/>} />
         <Route path="/admin/reset" element={<Reset/>} />
+
+        <Route path="/user/registration" element={<UserRegistration/>} />
+        <Route path="/user/login" element={<UserLogin/>} />
       </Routes>
     </Router>
   );

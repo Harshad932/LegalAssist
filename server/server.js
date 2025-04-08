@@ -11,6 +11,8 @@ import { analyzeCasePriority } from './prioritizationService.js';
 import { Strategy as LocalStrategy } from "passport-local";
 import {Case,Admin}  from "./projectModel.js";
 
+import authRoutes from './routes/authRoutes.js';
+
 dotenv.config();
 const app = express();
 app.use(express.json());;
@@ -394,6 +396,8 @@ app.get("/case/:tokenNumber", async (req, res) => {
             res.status(500).json({ message: 'Server error' });
           }
         });
+
+app.use('/api/auth', authRoutes)
 
   app.listen(process.env.PORT, () => {
     console.log("Server running on port: " + process.env.PORT);
