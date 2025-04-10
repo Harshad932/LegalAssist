@@ -12,6 +12,10 @@ import { Strategy as LocalStrategy } from "passport-local";
 import {Case,Admin}  from "./projectModel.js";
 
 import authUserRoutes from './routes/authUserRoutes.js';
+import { protect,lawyerProtect } from './middleware/authMiddleware.js';
+import User from './models/User.js';
+import Lawyer from './models/Lawyer.js';
+
 import authLawyerRoutes from './routes/authLawyerRoutes.js';
 
 dotenv.config();
@@ -267,9 +271,9 @@ app.get("/case/:tokenNumber", async (req, res) => {
         
         // Define models to try in order (fallback strategy)
         const models = [
-          "google/gemini-2.0-pro-exp-02-05:free",
-          "google/gemini-pro:free",  // Fallback to standard Gemini Pro
-          "openai/gpt-3.5-turbo:free" // Final fallback to GPT-3.5
+          "google/gemini-pro",          // Primary model
+          "anthropic/claude-3-sonnet",  // First fallback
+          "openai/gpt-3.5-turbo"        // Final fallback
         ];
         
         let botResponse = null;
@@ -285,56 +289,56 @@ app.get("/case/:tokenNumber", async (req, res) => {
               messages: [
                 { 
                   role: "system", 
-                  content: "Your name is Legal Support Chatbot. You are a legal expert specializing in Indian laws. When answering legal questions, always provide information based on Indian laws unless explicitly stated otherwise,always provide relevant 2 to 3 past cases related to prompt."
+                  content: "Your name is Legal Support Chatbot. You are a legal expert specializing in Indian laws. When answering legal questions, always provide information based on Indian laws unless explicitly stated otherwise, always provide relevant 2 to 3 past cases related to prompt."
                 },
                 { role: "user", content: combinedMessage }
               ],
             }, {
               headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`
-              }
+                "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+                "HTTP-Referer": "YOUR_SITE_URL",  // Required by OpenRouter
+                "X-Title": "YOUR_APP_NAME"       // Required by OpenRouter
+              },
+              timeout: 10000 // 10 seconds timeout
             });
             
             // If we get here, the request succeeded
-            if (response.data && response.data.choices && response.data.choices.length > 0) {
-              botResponse = response.data.choices[0].message?.content || "No content in response.";
+            if (response.data?.choices?.[0]?.message?.content) {
+              botResponse = response.data.choices[0].message.content;
               console.log(`Successfully got response from ${model}`);
-              break; // Exit the loop as we got a successful response
+              
+              // Update prompt history (limit to last 5 exchanges to avoid too long context)
+              promptHistory += `\nUser: ${message}\nBot: ${botResponse}`;
+              promptHistory = promptHistory.split('\n').slice(-10).join('\n'); // Keep last 5 exchanges
+              
+              return res.json({ reply: botResponse });
             }
           } catch (modelError) {
             console.error(`Error with model ${model}:`, modelError.response?.data || modelError.message);
             lastError = modelError;
             
-            // If it's not a rate limit error, we might want to stop trying
+            // If it's not a rate limit error, continue to next model
             if (modelError.response?.status !== 429) {
-              break;
+              continue;
             }
             
-            // For rate limit errors, continue to next model after a short delay
-            await new Promise(resolve => setTimeout(resolve, 500));
+            // For rate limit errors, wait a bit before trying next model
+            await new Promise(resolve => setTimeout(resolve, 1000));
           }
         }
         
-        if (botResponse) {
-          // Update prompt history (only keeping essential context)
-          promptHistory += `\nUser: ${message}\nBot: ${botResponse}`;
-          return res.json({ reply: botResponse });
-        } else {
-          // If all models failed, return an appropriate error
-          console.error("All models failed. Last error:", lastError?.response?.data || lastError?.message);
-          
-          // Return a user-friendly message
-          return res.status(503).json({ 
-            error: "The service is currently experiencing high demand. Please try again in a few moments.",
-            details: lastError?.response?.data || lastError?.message
-          });
-        }
+        // If all models failed
+        console.error("All models failed. Last error:", lastError?.response?.data || lastError?.message);
+        return res.status(503).json({ 
+          error: "Our legal experts are currently busy. Please try again shortly.",
+          details: lastError?.response?.data || lastError?.message
+        });
         
       } catch (error) {
         console.error("Chat API error:", error.response?.data || error.message);
         res.status(500).json({ 
-          error: "Error processing request",
+          error: "Error processing your legal query",
           details: error.response?.data || error.message
         });
       }
@@ -400,6 +404,89 @@ app.get("/case/:tokenNumber", async (req, res) => {
 
 app.use('/api/user/auth', authUserRoutes);
 app.use('/api/lawyer/auth', authLawyerRoutes);
+
+app.get('/api/users/me', protect, async (req, res) => {
+  try {
+    
+    const user = await User.findById(req.user._id)
+      .select('-password')
+      .populate('cases'); // If you want to populate cases
+    
+    if (!user) {
+      return res.status(404).json({ 
+        success: false,
+        message: 'User not found' 
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: user
+    });
+  } catch (error) {
+    console.error('Server error in /me route:', error); // Debug
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: error.message // Include specific error
+    });
+  }
+});
+
+app.get('/api/lawyers/search', async (req, res) => {
+  try {
+    const { specialization, location, minExperience, maxRate } = req.query;
+    
+    // Initialize query with verified: true
+    const query={}
+    
+    if (specialization) {
+      query.specialization = { $in: specialization.split(',').map(s => s.trim()) };
+    }
+    
+    if (location) {
+      query.location = new RegExp(location.replace('+', ' '), 'i'); // Handle URL encoded spaces
+    }
+    
+    if (minExperience) {
+      query.experience = { $gte: parseInt(minExperience) };
+    }
+    
+    if (maxRate) {
+      query.hourlyRate = { $lte: parseInt(maxRate) };
+    }
+    
+    const lawyers = await Lawyer.find(query).select('-password -__v');
+    
+    res.json(lawyers);
+  } catch (error) {
+    console.error('Search error:', error);
+    res.status(500).json({ 
+      success: false,
+      message: error.message,
+      error: error.stack // For debugging
+    });
+  }
+});
+
+// Get lawyer profile
+app.get('/api/lawyers/me', protect, lawyerProtect, async (req, res) => {
+  try {
+
+    const lawyer = await Lawyer.findById(req.lawyer._id)
+      .select('-password -__v');
+
+    res.status(200).json({
+      success: true,
+      data: lawyer
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
 
   app.listen(process.env.PORT, () => {
     console.log("Server running on port: " + process.env.PORT);

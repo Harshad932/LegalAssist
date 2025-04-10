@@ -8,7 +8,6 @@ export default function UserRegistration() {
     email: '',
     password: '',
     phone: '',
-    role: 'client' // Default role
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();

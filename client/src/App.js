@@ -11,9 +11,11 @@ import Reset from './components/Reset';
 
 import UserRegistration from './components/user/userRegistration';
 import UserLogin from './components/user/UserLogin';
+import UserProfile from './components/user/UserProfile';
 
 import LawyerRegistration from './components/lawyer/LawyerRegistration';
 import LawyerLogin from './components/lawyer/LawyerLogin';
+import LawyerProfile from './components/lawyer/LawyerProfile';
 
 function App() {
   return (
@@ -30,9 +32,11 @@ function App() {
 
         <Route path="/user/registration" element={<UserRegistration/>} />
         <Route path="/user/login" element={<UserLogin/>} />
+        <Route path="/user/profile" element={<UserProfile/>} />
 
         <Route path="/lawyer/registration" element={<LawyerRegistration/>} />
         <Route path="/lawyer/login" element={<LawyerLogin/>} />
+        <Route path="/lawyer/profile" element={<LawyerProfile/>} />
       </Routes>
     </Router>
   );

@@ -23,7 +23,6 @@ export const registerUser = async (req, res) => {
       email,
       password,
       phone,
-      role: 'client'
     });
 
     if (user) {

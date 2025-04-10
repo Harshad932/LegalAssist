@@ -34,11 +34,9 @@ export default function UserLogin() {
         }));
         console.log("Success")
         // Redirect based on role
-        // if (response.data.role === 'admin') {
-        //   navigate('/admin-dashboard');
-        // } else {
-        //   navigate('/dashboard');
-        // }
+        
+          navigate('/user/profile');
+    
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');

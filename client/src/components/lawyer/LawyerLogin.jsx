@@ -18,7 +18,6 @@ export default function LawyerLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
     
     try {
       const response = await axios.post('http://localhost:4000/api/lawyer/auth/login', formData);
@@ -26,15 +25,15 @@ export default function LawyerLogin() {
       if (response.data.success) {
         localStorage.setItem('lawyerToken', response.data.token);
         localStorage.setItem('lawyerData', JSON.stringify({
-          _id: response.data._id,
+          id: response.data.id,
           name: response.data.name,
           email: response.data.email,
           role: response.data.role
         }));
-        navigate('/lawyer/dashboard');
+        navigate('/lawyer/profile');
       }
-    } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+    } catch (error) {
+      setError(error.response?.data?.message || 'Login failed');
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const lawyerSchema = new mongoose.Schema({
   name: {
@@ -52,10 +53,6 @@ const lawyerSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
-  verified: {
-    type: Boolean,
-    default: false
-  }
 }, {
   timestamps: true
 });
@@ -69,7 +66,15 @@ lawyerSchema.pre('save', async function(next) {
   next();
 });
 
-// Password comparison method
+// In your Lawyer model file
+lawyerSchema.methods.generateAuthToken = function() {
+  return jwt.sign(
+    { id: this._id, role: 'lawyer' }, // Include role in token
+    process.env.JWT_SECRET,
+    { expiresIn: '30d' }
+  );
+};
+
 lawyerSchema.methods.matchPassword = async function(enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };

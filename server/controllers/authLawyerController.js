@@ -64,27 +64,38 @@ export const registerLawyer = async (req, res) => {
 // @desc    Authenticate lawyer & get token
 // @route   POST /api/auth/lawyer/login
 // @access  Public
+// authController.js
 export const loginLawyer = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     const lawyer = await Lawyer.findOne({ email });
 
-    if (lawyer && (await lawyer.matchPassword(password))) {
-      res.json({
-        success: true,
-        _id: lawyer._id,
-        name: lawyer.name,
-        email: lawyer.email,
-        role: lawyer.role,
-        token: generateToken(lawyer._id)
-      });
-    } else {
-      res.status(401).json({
+    if (!lawyer) {
+      return res.status(401).json({
         success: false,
-        message: 'Invalid email or password'
+        message: 'Invalid credentials'
       });
     }
+
+    const isMatch = await lawyer.matchPassword(password);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
+    }
+
+    const token = lawyer.generateAuthToken();
+
+    res.json({
+      success: true,
+      token,
+      role: 'lawyer',
+      id: lawyer._id,
+      name: lawyer.name,
+      email: lawyer.email
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
