@@ -24,9 +24,7 @@ import AcceptedCases from './components/lawyer/AcceptedCases';
 import LawyerCaseDetails from './components/lawyer/LawyerCaseDetails';
 import LawyerMessagesPage from './components/lawyer/LawyerMessagePage';
 
-import { useWindowSession } from './hooks/useWindowSession';
 function App() {
-  useWindowSession();
   return (
     <Router>
       <Routes>

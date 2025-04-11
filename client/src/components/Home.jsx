@@ -50,8 +50,8 @@ const Home = () => {
             <a href="#track-case" className="btn">Track Your Case</a>
           </div>
           <div className="legal-home-login-container">
-            <Link to="/lawyer-login" className="legal-home-login-btn legal-home-lawyer">Lawyer Login</Link>
-            <Link to="/user-login" className="legal-home-login-btn legal-home-user">User Login</Link>
+            <Link to="/lawyer/login" className="legal-home-login-btn legal-home-lawyer">Lawyer Login</Link>
+            <Link to="/user/login" className="legal-home-login-btn legal-home-user">User Login</Link>
           </div>
                   </div>
       </section>

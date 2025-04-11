@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../assets/styles/lawyer/LawyerLogin.css'; 
-
-import { setLawyerToken, setLawyerData } from '../../utils/storage';
+// Make sure to create this CSS file
 
 export default function LawyerLogin() {
   const [formData, setFormData] = useState({
@@ -26,15 +25,15 @@ export default function LawyerLogin() {
       const response = await axios.post('http://localhost:4000/api/lawyer/auth/login', formData);
       
       if (response.data.success) {
-        setLawyerToken(response.data.token);
-        setLawyerData({
+        localStorage.setItem('lawyerToken', response.data.token);
+        localStorage.setItem('lawyerData', JSON.stringify({
           id: response.data.id,
           name: response.data.name,
           email: response.data.email,
           role: response.data.role
-        });
+        }));
         navigate('/lawyer/profile');
-      } 
+      }
     } catch (error) {
       setError(error.response?.data?.message || 'Login failed');
     } finally {
