@@ -12,12 +12,21 @@ import Reset from './components/Reset';
 import UserRegistration from './components/user/userRegistration';
 import UserLogin from './components/user/UserLogin';
 import UserProfile from './components/user/UserProfile';
+import LawyerProfileView from './components/user/LawyerProfileView';
+import RequestDetails from './components/user/RequestDetails';
+import ClientMessagesPage from './components/user/ClientMessagePage';
 
 import LawyerRegistration from './components/lawyer/LawyerRegistration';
 import LawyerLogin from './components/lawyer/LawyerLogin';
 import LawyerProfile from './components/lawyer/LawyerProfile';
+import CaseRequestDetails from './components/lawyer/CaseRequestDetails';
+import AcceptedCases from './components/lawyer/AcceptedCases';
+import LawyerCaseDetails from './components/lawyer/LawyerCaseDetails';
+import LawyerMessagesPage from './components/lawyer/LawyerMessagePage';
 
+import { useWindowSession } from './hooks/useWindowSession';
 function App() {
+  useWindowSession();
   return (
     <Router>
       <Routes>
@@ -33,10 +42,17 @@ function App() {
         <Route path="/user/registration" element={<UserRegistration/>} />
         <Route path="/user/login" element={<UserLogin/>} />
         <Route path="/user/profile" element={<UserProfile/>} />
+        <Route path="/user/lawyer-profile/:lawyerId" element={<LawyerProfileView/>} />
+        <Route path="/requests/:requestId" element={<RequestDetails />} />
 
         <Route path="/lawyer/registration" element={<LawyerRegistration/>} />
         <Route path="/lawyer/login" element={<LawyerLogin/>} />
         <Route path="/lawyer/profile" element={<LawyerProfile/>} />
+        <Route path="/lawyer/case-requests/:requestId" element={<CaseRequestDetails/>} />
+        <Route path="/lawyer/accepted-cases" element={<AcceptedCases />} />
+        <Route path="/lawyer/case-details/:caseToken" element={<LawyerCaseDetails />} />
+        <Route path="/lawyer/messages/:caseToken" element={<LawyerMessagesPage />} />
+        <Route path="/client/messages/:caseToken" element={<ClientMessagesPage />} />
       </Routes>
     </Router>
   );

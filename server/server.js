@@ -12,15 +12,29 @@ import { Strategy as LocalStrategy } from "passport-local";
 import {Case,Admin}  from "./projectModel.js";
 
 import authUserRoutes from './routes/authUserRoutes.js';
-import { protect,lawyerProtect } from './middleware/authMiddleware.js';
+import { protect,lawyerProtect,userProtect } from './middleware/authMiddleware.js';
 import User from './models/User.js';
 import Lawyer from './models/Lawyer.js';
+import CaseRequest from './models/CaseRequest.js';
 
 import authLawyerRoutes from './routes/authLawyerRoutes.js';
+
+import messageRoutes from './routes/messageRoutes.js';
+
+import { createServer } from 'http';
+import { initializeSocket } from './socket.js';
 
 dotenv.config();
 const app = express();
 app.use(express.json());;
+
+const server = createServer(app);
+
+// Initialize WebSocket
+const io = initializeSocket(server);
+
+// Store io instance in app for use in routes
+app.set('socketio', io);
 
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -488,8 +502,318 @@ app.get('/api/lawyers/me', protect, lawyerProtect, async (req, res) => {
   }
 });
 
-  app.listen(process.env.PORT, () => {
-    console.log("Server running on port: " + process.env.PORT);
-  });
+app.get('/api/lawyers/:id', async (req, res) => {
+  try {
+    const lawyer = await Lawyer.findById(req.params.id)
+      .select('-password -__v');
+    
+    if (!lawyer) {
+      return res.status(404).json({
+        success: false,
+        message: 'Lawyer not found'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: lawyer
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+app.post('/api/case-requests', protect, async (req, res) => {
+  try {
+    const { lawyerId, caseToken, clientName, clientEmail, clientPhone, caseDetails } = req.body;
+    
+    // Create new case request
+    const newRequest = await CaseRequest.create({
+      lawyer: lawyerId,
+      client: req.user._id,
+      caseToken,
+      clientName,
+      clientEmail,
+      clientPhone,
+      caseDetails,
+      status: 'pending'
+    });
+
+    // In real app, you might want to:
+    // 1. Send email notification to lawyer
+    // 2. Add notification to lawyer's dashboard
+
+    res.status(201).json({
+      success: true,
+      data: newRequest
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// Correct route definition
+app.get('/api/lawyers/my/requests', protect, lawyerProtect, async (req, res) => {
+  try {
+    const requests = await CaseRequest.find({ 
+      lawyer: req.lawyer._id,
+      status: 'pending'
+    })
+    .sort({ createdAt: -1 })
+    .populate('clientUser', 'name email phone'); // Optional: populate client info
+
+    res.status(200).json({
+      success: true,
+      data: requests
+    });
+  } catch (error) {
+    console.error('Error fetching requests:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error fetching requests',
+      error: error.message
+    });
+  }
+});
+
+app.patch('/api/case-requests/:id', protect, lawyerProtect, async (req, res) => {
+  try {
+    const { status } = req.body;
+    const request = await CaseRequest.findOneAndUpdate(
+      { 
+        _id: req.params.id,
+        lawyer: req.lawyer._id // Ensure lawyer only updates their own requests
+      },
+      { status },
+      { new: true }
+    );
+
+    if (!request) {
+      return res.status(404).json({
+        success: false,
+        message: 'Request not found'
+      });
+    }
+
+    // In real app, you would:
+    // 1. Send email notification to client
+    // 2. Create a case if accepted
+    // 3. Update any related data
+
+    res.status(200).json({
+      success: true,
+      data: request
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// Get request by ID
+app.get('/api/case-requests/:id', protect, lawyerProtect, async (req, res) => {
+  try {
+    const request = await CaseRequest.findById(req.params.id)
+      .populate('clientUser', 'name email phone');
+    
+    if (!request) {
+      return res.status(404).json({
+        success: false,
+        message: 'Request not found'
+      });
+    }
+
+    // Verify lawyer owns this request
+    if (!request.lawyer.equals(req.lawyer._id)) {
+      return res.status(403).json({
+        success: false,
+        message: 'Not authorized to access this request'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: request
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// Get case by token number
+app.get('/api/cases/by-token/:token', protect, async (req, res) => {
+  try {
+    const caseData = await Case.findOne({ tokenNumber: req.params.token });
+    
+    if (!caseData) {
+      return res.status(404).json({
+        success: false,
+        message: 'Case not found'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: caseData
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// Get case by token
+app.get('/api/user/cases/by-token/:token', protect, async (req, res) => {
+  try {
+    // Verify the case belongs to the requesting user
+    const caseData = await Case.findOne({ 
+      tokenNumber: req.params.token,
+    });
+    
+    if (!caseData) {
+      return res.status(404).json({
+        success: false,
+        message: 'Case not found or not owned by you'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: caseData
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// Get user's case requests
+app.get('/api/users/requests', protect, async (req, res) => {
+  try {
+    const requests = await CaseRequest.find({ client: req.user._id })
+      .populate('lawyer', 'name email specialization')
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      data: requests
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// Get single request (user's own only)
+// Get single request (user's own only)
+app.get('/api/requests/:id', protect, async (req, res) => {
+  try {
+    const request = await CaseRequest.findOne({
+      _id: req.params.id,
+      client: req.user._id // Ensure user only sees their own requests
+    }).populate('lawyer', 'name email specialization');
+
+    if (!request) {
+      return res.status(404).json({
+        success: false,
+        message: 'Request not found'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: request
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// Get all accepted cases for a lawyer
+app.get('/api/lawyer/accepted-cases', protect, lawyerProtect, async (req, res) => {
+  try {
+    const requests = await CaseRequest.find({
+      lawyer: req.lawyer._id,
+      status: 'accepted'
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      data: requests
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// Get case details by token number
+app.get('/api/cases/:tokenNumber', protect, lawyerProtect, async (req, res) => {
+  try {
+    const { tokenNumber } = req.params;
+
+    // Find the case request first to verify ownership
+    const request = await CaseRequest.findOne({
+      caseToken: tokenNumber,
+      lawyer: req.lawyer._id
+    });
+
+    if (!request) {
+      return res.status(404).json({
+        success: false,
+        message: 'Case not found or not authorized'
+      });
+    }
+
+    // Find the case details
+    const caseDetails = await Case.findOne({ tokenNumber });
+
+    if (!caseDetails) {
+      return res.status(404).json({
+        success: false,
+        message: 'Case details not found'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: {
+        case: caseDetails,
+        request: request
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+app.use('/api/messages', messageRoutes);
+
+server.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`));
 
 // Fetch unprioritized cases and set priorities for a specific number of cases

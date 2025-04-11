@@ -1,0 +1,204 @@
+/* lawyer-registration.css */
+.lawyer-registration-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #F7FAFC;
+    font-family: 'Open Sans', sans-serif;
+    padding: 40px 20px;
+  }
+  
+  .lawyer-registration-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 800px;
+    overflow: hidden;
+  }
+  
+  .lawyer-registration-header {
+    text-align: center;
+    padding: 30px 40px;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  
+  .lawyer-registration-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .lawyer-registration-app-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #1A365D;
+    margin-left: 12px;
+    font-size: 1.5rem;
+  }
+  
+  .lawyer-registration-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #1A365D;
+    margin: 0 0 10px 0;
+    font-size: 1.75rem;
+  }
+  
+  .lawyer-registration-subtitle {
+    color: #4A5568;
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .lawyer-registration-error {
+    background-color: #FED7D7;
+    color: #C53030;
+    padding: 12px 20px;
+    margin: 20px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+  }
+  
+  .lawyer-registration-form {
+    padding: 20px 40px 40px;
+  }
+  
+  .lawyer-registration-form-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #EDF2F7;
+  }
+  
+  .lawyer-registration-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #2C7A7B;
+    margin: 0 0 20px 0;
+    font-size: 1.25rem;
+  }
+  
+  .lawyer-registration-form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px 15px;
+  }
+  
+  .lawyer-registration-input-group {
+    flex: 1 1 calc(50% - 20px);
+    margin: 0 10px 15px;
+    min-width: 250px;
+  }
+  
+  .lawyer-registration-input-group-full {
+    flex: 1 1 calc(100% - 20px);
+  }
+  
+  .lawyer-registration-label {
+    display: block;
+    color: #2D3748;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  .lawyer-registration-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #1A202C;
+    transition: all 0.2s;
+  }
+  
+  .lawyer-registration-input:focus {
+    border-color: #2C7A7B;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.1);
+  }
+  
+  .lawyer-registration-input::placeholder {
+    color: #A0AEC0;
+  }
+  
+  .lawyer-registration-input-hint {
+    display: block;
+    color: #718096;
+    font-size: 0.75rem;
+    margin-top: 5px;
+  }
+  
+  .lawyer-registration-form-actions {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .lawyer-registration-button {
+    background-color: #DD6B20;
+    color: white;
+    font-weight: 600;
+    padding: 14px 30px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+  
+  .lawyer-registration-button:hover {
+    background-color: #C05621;
+  }
+  
+  .lawyer-registration-button:disabled {
+    background-color: #ED8936;
+    cursor: not-allowed;
+  }
+  
+  .lawyer-registration-login-link {
+    margin-top: 20px;
+    color: #4A5568;
+    font-size: 0.875rem;
+    text-align: center;
+  }
+  
+  .lawyer-registration-login-link a {
+    color: #2C7A7B;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  
+  .lawyer-registration-login-link a:hover {
+    color: #1A365D;
+    text-decoration: underline;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .lawyer-registration-header {
+      padding: 25px 20px;
+    }
+    
+    .lawyer-registration-form {
+      padding: 20px;
+    }
+    
+    .lawyer-registration-form-row {
+      flex-direction: column;
+      margin: 0;
+    }
+    
+    .lawyer-registration-input-group {
+      flex: 1 1 100%;
+      margin: 0 0 15px 0;
+      min-width: 0;
+    }
+  }

@@ -1,0 +1,149 @@
+/* Legal Assist Application Styles */
+
+/* Color Variables */
+:root {
+    --navy: #1A365D;
+    --teal: #2C7A7B;
+    --amber: #DD6B20;
+    --light-gray: #F7FAFC;
+    --text-dark: #2D3748;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Common Styles */
+  .lawyer-messages-container,
+  .client-messages-container {
+    background-color: var(--light-gray);
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-dark);
+  }
+  
+  .lawyer-messages-wrapper,
+  .client-messages-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .lawyer-messages-header h1,
+  .client-messages-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+  
+  /* Lawyer-specific Styles */
+  .lawyer-messages-header h1 {
+    color: var(--navy);
+  }
+  
+  .lawyer-messages-sent {
+    background-color: var(--navy);
+    box-shadow: var(--shadow);
+  }
+  
+  .lawyer-messages-input:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.2);
+  }
+  
+  /* Client-specific Styles */
+  .client-messages-header h1 {
+    color: var(--teal);
+  }
+  
+  .client-messages-sent {
+    background-color: var(--teal);
+    box-shadow: var(--shadow);
+  }
+  
+  .client-messages-input:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.2);
+  }
+  
+  /* Message Bubble Styles */
+  .lawyer-messages-received,
+  .client-messages-received {
+    background-color: #F1F5F9;
+    box-shadow: var(--shadow);
+  }
+  
+  /* Message Timeline */
+  .lawyer-messages-timeline,
+  .client-messages-timeline {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  
+  /* Send Button Styles */
+  .lawyer-messages-send,
+  .client-messages-send {
+    background-color: var(--amber);
+    transition: all 0.3s ease;
+  }
+  
+  .lawyer-messages-send:hover,
+  .client-messages-send:hover {
+    background-color: #C05621; /* Darker amber */
+  }
+  
+  /* Loading Animation */
+  .lawyer-messages-loading .animate-spin,
+  .client-messages-loading .animate-spin {
+    border-color: transparent;
+  }
+  
+  .lawyer-messages-loading .animate-spin {
+    border-top-color: var(--navy);
+    border-bottom-color: var(--navy);
+  }
+  
+  .client-messages-loading .animate-spin {
+    border-top-color: var(--teal);
+    border-bottom-color: var(--teal);
+  }
+  
+  /* Empty State */
+  .lawyer-messages-empty svg,
+  .client-messages-empty svg {
+    color: #CBD5E0;
+  }
+  
+  /* Scrollbar Styles */
+  .lawyer-messages-list::-webkit-scrollbar,
+  .client-messages-list::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .lawyer-messages-list::-webkit-scrollbar-track,
+  .client-messages-list::-webkit-scrollbar-track {
+    background: #F1F5F9;
+  }
+  
+  .lawyer-messages-list::-webkit-scrollbar-thumb,
+  .client-messages-list::-webkit-scrollbar-thumb {
+    background-color: #CBD5E0;
+    border-radius: 20px;
+  }
+  
+  /* Date Headers */
+  .lawyer-messages-date-header,
+  .client-messages-date-header {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .lawyer-messages-header,
+    .client-messages-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .lawyer-messages-back-button,
+    .client-messages-back-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }

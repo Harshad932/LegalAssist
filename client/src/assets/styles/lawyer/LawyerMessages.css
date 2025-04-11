@@ -1,0 +1,288 @@
+/* Lawyer Messages Specific Styles */
+.lawyer-messages-container {
+    background-color: #F7FAFC;
+    min-height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+    color: #2D3748;
+  }
+  
+  .lawyer-messages-wrapper {
+    max-width: 64rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5rem;
+  }
+  
+  .lawyer-messages-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #E2E8F0;
+    padding-bottom: 1rem;
+  }
+  
+  .lawyer-messages-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1A365D;
+  }
+  
+  .lawyer-messages-header p {
+    font-size: 0.875rem;
+    color: #718096;
+  }
+  
+  .lawyer-messages-back-button {
+    display: flex;
+    align-items: center;
+    background-color: #EDF2F7;
+    color: #1A365D;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+  }
+  
+  .lawyer-messages-back-button:hover {
+    background-color: #E2E8F0;
+  }
+  
+  .lawyer-messages-back-button svg {
+    height: 1.25rem;
+    width: 1.25rem;
+    margin-right: 0.25rem;
+  }
+  
+  .lawyer-messages-chat-container {
+    background-color: #FFFFFF;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  
+  .lawyer-messages-list {
+    height: 24rem;
+    overflow-y: auto;
+    padding: 0 0.5rem;
+  }
+  
+  .lawyer-messages-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #A0AEC0;
+  }
+  
+  .lawyer-messages-empty svg {
+    height: 3rem;
+    width: 3rem;
+    margin-bottom: 0.5rem;
+    color: #CBD5E0;
+  }
+  
+  .lawyer-messages-date-header {
+    text-align: center;
+    margin: 1rem 0;
+  }
+  
+  .lawyer-messages-date-header span {
+    font-size: 0.75rem;
+    background-color: #F1F5F9;
+    color: #718096;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+  }
+  
+  .lawyer-messages-bubble {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+  
+  .lawyer-messages-bubble.justify-end {
+    justify-content: flex-end;
+  }
+  
+  .lawyer-messages-bubble.justify-start {
+    justify-content: flex-start;
+  }
+  
+  .lawyer-messages-sent {
+    background-color: #1A365D;
+    color: #FFFFFF;
+    border-radius: 0.5rem;
+    border-top-right-radius: 0;
+    padding: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    max-width: 20rem;
+  }
+  
+  .lawyer-messages-received {
+    background-color: #F1F5F9;
+    color: #2D3748;
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    padding: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    max-width: 20rem;
+  }
+  
+  .lawyer-messages-sent .font-medium,
+  .lawyer-messages-received .font-medium {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .lawyer-messages-sent .text-xs,
+  .lawyer-messages-received .text-xs {
+    font-size: 0.75rem;
+    opacity: 0.75;
+    margin-top: 0.25rem;
+    text-align: right;
+  }
+  
+  .lawyer-messages-composer {
+    background-color: #FFFFFF;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+  }
+  
+  .lawyer-messages-composer form {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .lawyer-messages-input {
+    flex: 1;
+    border: 1px solid #E2E8F0;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+  }
+  
+  .lawyer-messages-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.2);
+    border-color: #1A365D;
+  }
+  
+  .lawyer-messages-send {
+    display: flex;
+    align-items: center;
+    background-color: #DD6B20;
+    color: #FFFFFF;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+  }
+  
+  .lawyer-messages-send:hover:not(:disabled) {
+    background-color: #C05621;
+  }
+  
+  .lawyer-messages-send:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .lawyer-messages-send span {
+    margin-right: 0.25rem;
+  }
+  
+  .lawyer-messages-send svg {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  
+  .lawyer-messages-security-note {
+    font-size: 0.75rem;
+    color: #718096;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  
+  .lawyer-messages-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+  }
+  
+  .lawyer-messages-loading .animate-spin {
+    height: 3rem;
+    width: 3rem;
+    border-top: 2px solid #1A365D;
+    border-bottom: 2px solid #1A365D;
+    border-radius: 9999px;
+    animation: spin 1s linear infinite;
+  }
+  
+  .lawyer-messages-error {
+    background-color: #FEF2F2;
+    border: 1px solid #FECACA;
+    color: #B91C1C;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 32rem;
+  }
+  
+  .lawyer-messages-error button {
+    margin-top: 1rem;
+    background-color: #FEE2E2;
+    color: #B91C1C;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+  }
+  
+  .lawyer-messages-error button:hover {
+    background-color: #FCA5A5;
+  }
+  
+  /* Custom scrollbar for lawyer messages */
+  .lawyer-messages-list::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .lawyer-messages-list::-webkit-scrollbar-track {
+    background: #F1F5F9;
+  }
+  
+  .lawyer-messages-list::-webkit-scrollbar-thumb {
+    background-color: #CBD5E0;
+    border-radius: 3px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .lawyer-messages-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .lawyer-messages-back-button {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .lawyer-messages-sent,
+    .lawyer-messages-received {
+      max-width: 18rem;
+    }
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

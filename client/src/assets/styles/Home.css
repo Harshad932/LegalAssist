@@ -282,3 +282,47 @@
       font-size: 28px;
     }
   }
+
+  .legal-home-login-btn {
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .legal-home-login-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .legal-home-lawyer {
+    background-color: #3a5999;
+    color: white;
+    border: 2px solid #2a4a8c;
+  }
+  
+  .legal-home-user {
+    background-color: white;
+    color: #4a6eb5;
+    border: 2px solid white;
+  }
+  
+  .legal-home-login-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 640px) {
+    .legal-home-login-btn {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }

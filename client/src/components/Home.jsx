@@ -49,7 +49,11 @@ const Home = () => {
             <Link to="/chatbot" className="btn btn-accent">Chat with Legal AI</Link>
             <a href="#track-case" className="btn">Track Your Case</a>
           </div>
-        </div>
+          <div className="legal-home-login-container">
+            <Link to="/lawyer-login" className="legal-home-login-btn legal-home-lawyer">Lawyer Login</Link>
+            <Link to="/user-login" className="legal-home-login-btn legal-home-user">User Login</Link>
+          </div>
+                  </div>
       </section>
 
       <section id="features" className="features">

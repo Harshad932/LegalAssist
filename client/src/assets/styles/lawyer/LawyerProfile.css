@@ -1,0 +1,556 @@
+/* LawyerProfile.css */
+.lawyer-profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Open Sans', sans-serif;
+    color: #2D3748;
+    background-color: #F7FAFC;
+    min-height: 100vh;
+  }
+  
+  /* Header Styles */
+  .lawyer-profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  
+  .lawyer-profile-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #1A365D;
+  }
+  
+  .lawyer-profile-nav {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .lawyer-profile-nav-button {
+    padding: 8px 16px;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4A5568;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .lawyer-profile-nav-button:hover {
+    background-color: #EDF2F7;
+  }
+  
+  .lawyer-profile-nav-button-active {
+    background-color: #E6F6F7;
+    color: #2C7A7B;
+  }
+  
+  /* Loading & Error States */
+  .lawyer-profile-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+  }
+  
+  .lawyer-profile-loading-inline {
+    padding: 30px 0;
+  }
+  
+  .lawyer-profile-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(42, 67, 101, 0.1);
+    border-top-color: #1A365D;
+    border-radius: 50%;
+    animation: spinner 0.8s linear infinite;
+    margin-bottom: 16px;
+  }
+  
+  @keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .lawyer-profile-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    color: #E53E3E;
+    text-align: center;
+  }
+  
+  .lawyer-profile-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0;
+    color: #718096;
+    text-align: center;
+  }
+  
+  /* Profile Card Styles */
+  .lawyer-profile-card {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .lawyer-profile-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+    position: relative;
+  }
+  
+  .lawyer-profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #1A365D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    margin-right: 20px;
+  }
+  
+  .lawyer-profile-title {
+    flex: 1;
+  }
+  
+  .lawyer-profile-title h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1A365D;
+    margin: 0 0 8px 0;
+  }
+  
+  .lawyer-profile-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .lawyer-profile-status-available {
+    background-color: #E6FFFA;
+    color: #2C7A7B;
+  }
+  
+  .lawyer-profile-status-unavailable {
+    background-color: #FEF5F5;
+    color: #C53030;
+  }
+  
+  .lawyer-profile-edit-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #EDF2F7;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4A5568;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .lawyer-profile-edit-button:hover {
+    background-color: #E2E8F0;
+  }
+  
+  /* Profile Grid Layout */
+  .lawyer-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .lawyer-profile-info-section {
+    margin-bottom: 24px;
+  }
+  
+  .lawyer-profile-info-section-full {
+    grid-column: span 2;
+  }
+  
+  .lawyer-profile-info-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1A365D;
+    margin: 0 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #EDF2F7;
+  }
+  
+  .lawyer-profile-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .lawyer-profile-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .lawyer-profile-info-label {
+    font-size: 12px;
+    color: #718096;
+    font-weight: 600;
+  }
+  
+  .lawyer-profile-info-value {
+    font-size: 16px;
+    color: #2D3748;
+  }
+  
+  /* Tags Styling */
+  .lawyer-profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .lawyer-profile-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .lawyer-profile-tag-specialization {
+    background-color: #EBECFE;
+    color: #5A67D8;
+  }
+  
+  .lawyer-profile-tag-language {
+    background-color: #E6FFFA;
+    color: #2C7A7B;
+  }
+  
+  .lawyer-profile-empty-message {
+    color: #A0AEC0;
+    font-style: italic;
+  }
+  
+  /* Action Buttons */
+  .lawyer-profile-action-buttons {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .lawyer-profile-action-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .lawyer-profile-action-button-cases {
+    background-color: #1A365D;
+    color: white;
+  }
+  
+  .lawyer-profile-action-button-cases:hover {
+    background-color: #152a4a;
+  }
+  
+  .lawyer-profile-action-button-calendar {
+    background-color: #2C7A7B;
+    color: white;
+  }
+  
+  .lawyer-profile-action-button-calendar:hover {
+    background-color: #246b6b;
+  }
+  
+  .lawyer-profile-action-button-document {
+    background-color: #DD6B20;
+    color: white;
+  }
+  
+  .lawyer-profile-action-button-document:hover {
+    background-color: #c55c18;
+  }
+  
+  /* Case Requests Section */
+  .lawyer-profile-requests {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .lawyer-profile-requests-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .lawyer-profile-requests-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1A365D;
+    margin: 0;
+  }
+  
+  .lawyer-profile-requests-actions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .lawyer-profile-requests-filter {
+    padding: 8px 12px;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #4A5568;
+    background-color: white;
+  }
+  
+  .lawyer-profile-requests-refresh {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background-color: #EDF2F7;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4A5568;
+    cursor: pointer;
+  }
+  
+  .lawyer-profile-requests-refresh:hover {
+    background-color: #E2E8F0;
+  }
+  
+  /* Empty State */
+  .lawyer-profile-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    color: #718096;
+    text-align: center;
+  }
+  
+  .lawyer-profile-empty-state svg {
+    color: #A0AEC0;
+    margin-bottom: 16px;
+  }
+  
+  .lawyer-profile-empty-state p {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+  
+  .lawyer-profile-empty-state span {
+    font-size: 14px;
+    color: #A0AEC0;
+  }
+  
+  /* Request List Items */
+  .lawyer-profile-requests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .lawyer-profile-request-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #F8FAFC;
+    transition: all 0.2s ease;
+  }
+  
+  .lawyer-profile-request-item:hover {
+    background-color: #EDF2F7;
+  }
+  
+  .lawyer-profile-request-info {
+    flex: 1;
+  }
+  
+  .lawyer-profile-request-primary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .lawyer-profile-request-primary h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #2D3748;
+    margin: 0;
+  }
+  
+  .lawyer-profile-request-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  
+  .lawyer-profile-request-status-pending {
+    background-color: #FEFCBF;
+    color: #B7791F;
+  }
+  
+  .lawyer-profile-request-status-accepted {
+    background-color: #E6FFFA;
+    color: #2C7A7B;
+  }
+  
+  .lawyer-profile-request-status-rejected {
+    background-color: #FEF5F5;
+    color: #C53030;
+  }
+  
+  .lawyer-profile-request-details {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .lawyer-profile-request-details p {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    font-size: 14px;
+    color: #718096;
+  }
+  
+  .lawyer-profile-request-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .lawyer-profile-request-view-button {
+    padding: 8px 16px;
+    background-color: #E6EEF8;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1A365D;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .lawyer-profile-request-view-button:hover {
+    background-color: #CBD5E0;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .lawyer-profile-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .lawyer-profile-info-section-full {
+      grid-column: span 1;
+    }
+    
+    .lawyer-profile-action-buttons {
+      flex-direction: column;
+    }
+    
+    .lawyer-profile-card-header {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .lawyer-profile-avatar {
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
+    
+    .lawyer-profile-edit-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    
+    .lawyer-profile-requests-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .lawyer-profile-requests-actions {
+      width: 100%;
+    }
+    
+    .lawyer-profile-requests-filter {
+      flex: 1;
+    }
+    
+    .lawyer-profile-request-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    
+    .lawyer-profile-request-details {
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .lawyer-profile-request-actions {
+      width: 100%;
+    }
+    
+    .lawyer-profile-request-view-button {
+      width: 100%;
+    }
+  }

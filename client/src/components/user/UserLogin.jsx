@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../../assets/styles/user/UserLogin.css'; // Import the CSS file
 
 export default function UserLogin() {
   const [formData, setFormData] = useState({
@@ -32,11 +33,9 @@ export default function UserLogin() {
           email: response.data.email,
           role: response.data.role
         }));
-        console.log("Success")
+        console.log("Success");
         // Redirect based on role
-        
-          navigate('/user/profile');
-    
+        navigate('/user/profile');
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
@@ -46,44 +45,64 @@ export default function UserLogin() {
   };
 
   return (
-    <div >
-      <h2>User Login</h2>
-      {error && <div>{error}</div>}
-      
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+    <div className="user-login-container">
+      <div className="user-login-card">
+        <div className="user-login-header">
+          <h2>User Login</h2>
+          <p className="user-login-subtitle">Access your Legal Assist account</p>
         </div>
         
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            minLength="6"
-          />
-        </div>
+        {error && <div className="user-login-error">{error}</div>}
         
-        <button type="submit" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-        
-        <div >
-          <Link to="/user/forgot-password">Forgot Password?</Link>
-          <span> | </span>
-          <Link to="/user/registration">Create Account</Link>
+        <form onSubmit={handleSubmit} className="user-login-form">
+          <div className="user-login-form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="user-login-input"
+              placeholder="Enter your email"
+            />
+          </div>
+          
+          <div className="user-login-form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              minLength="6"
+              className="user-login-input"
+              placeholder="Enter your password"
+            />
+          </div>
+          
+          <button 
+            type="submit" 
+            disabled={loading}
+            className="user-login-button"
+          >
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
+          
+          <div className="user-login-links">
+            <Link to="/user/forgot-password" className="user-login-link">Forgot Password?</Link>
+            <span className="user-login-divider">|</span>
+            <Link to="/user/registration" className="user-login-link">Create Account</Link>
+          </div>
+        </form>
+
+        <div className="user-login-footer">
+          <p>Need assistance? Contact our support team</p>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

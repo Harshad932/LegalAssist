@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../../assets/styles/user/LawyerSearch.css';
 
 const LawyerSearch = () => {
   const [searchParams, setSearchParams] = useState({
@@ -11,6 +13,7 @@ const LawyerSearch = () => {
   const [lawyers, setLawyers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setSearchParams({
@@ -64,91 +67,127 @@ const LawyerSearch = () => {
   };
 
   return (
-    <div className="mt-6">
-      <h2 className="text-xl font-semibold mb-4">Find a Lawyer</h2>
+    <div className="lawyer-search-container">
+      <div className="lawyer-search-header">
+        <h2>Find a Lawyer</h2>
+        <p className="lawyer-search-subtitle">Search for qualified legal professionals based on your needs</p>
+      </div>
       
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Specialization</label>
+      <form onSubmit={handleSubmit} className="lawyer-search-form">
+        <div className="lawyer-search-form-row">
+          <div className="lawyer-search-form-group">
+            <label htmlFor="specialization">Specialization</label>
             <input
+              id="specialization"
               type="text"
               name="specialization"
               value={searchParams.specialization}
               onChange={handleChange}
-              placeholder="e.g., Criminal, Family"
-              className="w-full p-2 border rounded"
+              placeholder="e.g., Criminal, Family, Corporate"
+              className="lawyer-search-input"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Location</label>
+          <div className="lawyer-search-form-group">
+            <label htmlFor="location">Location</label>
             <input
+              id="location"
               type="text"
               name="location"
               value={searchParams.location}
               onChange={handleChange}
               placeholder="City or State"
-              className="w-full p-2 border rounded"
+              className="lawyer-search-input"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Min Experience (years)</label>
+        <div className="lawyer-search-form-row">
+          <div className="lawyer-search-form-group">
+            <label htmlFor="minExperience">Min Experience (years)</label>
             <input
+              id="minExperience"
               type="number"
               name="minExperience"
               value={searchParams.minExperience}
               onChange={handleChange}
               min="0"
-              className="w-full p-2 border rounded"
+              placeholder="e.g., 5"
+              className="lawyer-search-input"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Max Hourly Rate (₹)</label>
+          <div className="lawyer-search-form-group">
+            <label htmlFor="maxRate">Max Hourly Rate (₹)</label>
             <input
+              id="maxRate"
               type="number"
               name="maxRate"
               value={searchParams.maxRate}
               onChange={handleChange}
               min="0"
-              className="w-full p-2 border rounded"
+              placeholder="e.g., 5000"
+              className="lawyer-search-input"
             />
           </div>
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className={`px-4 py-2 rounded text-white ${loading ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'}`}
-        >
-          {loading ? 'Searching...' : 'Search Lawyers'}
-        </button>
+        <div className="lawyer-search-button-container">
+          <button
+            type="submit"
+            disabled={loading}
+            className="lawyer-search-button"
+          >
+            {loading ? 'Searching...' : 'Search Lawyers'}
+          </button>
+        </div>
       </form>
 
-      {error && <div className="text-red-500 mt-2">{error}</div>}
+      {error && <div className="lawyer-search-error">{error}</div>}
 
       {lawyers.length > 0 && (
-        <div className="mt-6">
-          <h3 className="text-lg font-semibold mb-2">Available Lawyers</h3>
-          <div className="space-y-4">
+        <div className="lawyer-search-results">
+          <h3>Available Lawyers</h3>
+          <div className="lawyer-search-results-list">
             {lawyers.map(lawyer => (
-              <div key={lawyer._id} className="border rounded p-4 hover:bg-gray-50">
-                <h4 className="font-bold">{lawyer.name}</h4>
-                <p className="text-sm text-gray-600">{lawyer.specialization.join(', ')}</p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2 text-sm">
-                  <p>Exp: {lawyer.experience} yrs</p>
-                  <p>Rate: ₹{lawyer.hourlyRate}/hr</p>
-                  <p>Location: {lawyer.location}</p>
-                  <p>Languages: {lawyer.languages?.join(', ') || 'N/A'}</p>
+              <div key={lawyer._id} className="lawyer-search-result-card">
+                <div className="lawyer-search-result-header">
+                  <h4>{lawyer.name}</h4>
+                  <p className="lawyer-search-specialization">{lawyer.specialization.join(', ')}</p>
                 </div>
-                <button className="mt-2 text-blue-600 hover:underline">
-                  View Profile
-                </button>
+                <div className="lawyer-search-result-details">
+                  <div className="lawyer-search-detail-item">
+                    <span className="lawyer-search-detail-label">Experience:</span>
+                    <span className="lawyer-search-detail-value">{lawyer.experience} years</span>
+                  </div>
+                  <div className="lawyer-search-detail-item">
+                    <span className="lawyer-search-detail-label">Rate:</span>
+                    <span className="lawyer-search-detail-value">₹{lawyer.hourlyRate}/hr</span>
+                  </div>
+                  <div className="lawyer-search-detail-item">
+                    <span className="lawyer-search-detail-label">Location:</span>
+                    <span className="lawyer-search-detail-value">{lawyer.location}</span>
+                  </div>
+                  <div className="lawyer-search-detail-item">
+                    <span className="lawyer-search-detail-label">Languages:</span>
+                    <span className="lawyer-search-detail-value">{lawyer.languages?.join(', ') || 'N/A'}</span>
+                  </div>
+                </div>
+                <div className="lawyer-search-result-actions">
+                  <button 
+                    onClick={() => navigate(`/user/lawyer-profile/${lawyer._id}`)}
+                    className="lawyer-search-view-profile"
+                  >
+                    View Profile
+                  </button>
+                </div>
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {lawyers.length === 0 && !loading && !error && (
+        <div className="lawyer-search-no-results">
+          <p>Use the search form above to find lawyers that match your needs.</p>
         </div>
       )}
     </div>

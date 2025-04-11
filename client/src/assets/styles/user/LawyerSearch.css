@@ -1,0 +1,230 @@
+/* LawyerSearch.css */
+
+.lawyer-search-container {
+    padding: 16px 0;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .lawyer-search-header {
+    margin-bottom: 20px;
+  }
+  
+  .lawyer-search-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #1A365D;
+    margin: 0 0 8px 0;
+  }
+  
+  .lawyer-search-subtitle {
+    color: #718096;
+    font-size: 14px;
+    margin: 0;
+  }
+  
+  .lawyer-search-form {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 24px;
+    border: 1px solid #E2E8F0;
+  }
+  
+  .lawyer-search-form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  
+  @media (min-width: 768px) {
+    .lawyer-search-form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .lawyer-search-form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .lawyer-search-form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2D3748;
+    margin-bottom: 6px;
+  }
+  
+  .lawyer-search-input {
+    padding: 10px 12px;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #2D3748;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .lawyer-search-input:focus {
+    outline: none;
+    border-color: #2C7A7B;
+    box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.1);
+  }
+  
+  .lawyer-search-input::placeholder {
+    color: #A0AEC0;
+  }
+  
+  .lawyer-search-button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .lawyer-search-button {
+    background-color: #DD6B20;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-width: 200px;
+  }
+  
+  .lawyer-search-button:hover {
+    background-color: #C05621;
+  }
+  
+  .lawyer-search-button:disabled {
+    background-color: #ED8936;
+    cursor: not-allowed;
+  }
+  
+  .lawyer-search-error {
+    background-color: #FFF5F5;
+    color: #E53E3E;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border-left: 3px solid #E53E3E;
+  }
+  
+  .lawyer-search-results {
+    margin-top: 24px;
+  }
+  
+  .lawyer-search-results h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #1A365D;
+    margin: 0 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  
+  .lawyer-search-results-list {
+    display: grid;
+    gap: 16px;
+  }
+  
+  .lawyer-search-result-card {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    padding: 16px;
+    border: 1px solid #E2E8F0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .lawyer-search-result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .lawyer-search-result-header {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #EDF2F7;
+  }
+  
+  .lawyer-search-result-header h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #1A365D;
+    margin: 0 0 4px 0;
+  }
+  
+  .lawyer-search-specialization {
+    font-size: 14px;
+    color: #2C7A7B;
+    margin: 0;
+  }
+  
+  .lawyer-search-result-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  @media (min-width: 640px) {
+    .lawyer-search-result-details {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  .lawyer-search-detail-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .lawyer-search-detail-label {
+    font-size: 12px;
+    color: #718096;
+  }
+  
+  .lawyer-search-detail-value {
+    font-size: 14px;
+    color: #2D3748;
+    font-weight: 600;
+  }
+  
+  .lawyer-search-result-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .lawyer-search-view-profile {
+    background-color: #FFFFFF;
+    color: #2C7A7B;
+    border: 1px solid #2C7A7B;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .lawyer-search-view-profile:hover {
+    background-color: #2C7A7B;
+    color: #FFFFFF;
+  }
+  
+  .lawyer-search-no-results {
+    text-align: center;
+    padding: 32px 0;
+    color: #718096;
+    font-style: italic;
+    border: 1px dashed #CBD5E0;
+    border-radius: 8px;
+    background-color: #F7FAFC;
+  }

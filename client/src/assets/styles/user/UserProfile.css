@@ -1,0 +1,215 @@
+/* UserProfile.css */
+
+.user-profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    background-color: #F7FAFC;
+    min-height: 100vh;
+  }
+  
+  .user-profile-card,
+  .user-profile-requests-card {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  
+  .user-profile-header,
+  .user-profile-requests-header {
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid #EDF2F7;
+  }
+  
+  .user-profile-header h1,
+  .user-profile-requests-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #1A365D;
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .user-profile-subtitle {
+    color: #718096;
+    font-size: 14px;
+    margin-top: 4px;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .user-profile-details {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+    padding: 24px;
+  }
+  
+  @media (min-width: 768px) {
+    .user-profile-details {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .user-profile-detail-item {
+    padding: 12px;
+    border: 1px solid #EDF2F7;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .user-profile-detail-item:hover {
+    background-color: #F7FAFC;
+  }
+  
+  .user-profile-detail-item h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2D3748;
+    margin: 0 0 8px 0;
+  }
+  
+  .user-profile-detail-item p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #1A365D;
+    margin: 0;
+  }
+  
+  .user-profile-action {
+    padding: 0 24px 24px;
+  }
+  
+  .user-profile-find-lawyer-btn {
+    background-color: #2C7A7B;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .user-profile-find-lawyer-btn:hover {
+    background-color: #1A365D;
+  }
+  
+  .user-profile-lawyer-search {
+    padding: 24px;
+    border-top: 1px solid #EDF2F7;
+  }
+  
+  .user-profile-requests-list {
+    padding: 16px 24px 24px;
+  }
+  
+  .user-profile-request-item {
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .user-profile-request-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .user-profile-request-content {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .user-profile-request-info h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1A365D;
+    margin: 0 0 8px 0;
+  }
+  
+  .user-profile-lawyer-name {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #4A5568;
+    margin: 0 0 8px 0;
+  }
+  
+  .user-profile-status {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #4A5568;
+    margin: 0;
+  }
+  
+  .user-profile-status-pending {
+    color: #DD6B20;
+    font-weight: 600;
+  }
+  
+  .user-profile-status-accepted {
+    color: #38A169;
+    font-weight: 600;
+  }
+  
+  .user-profile-status-rejected {
+    color: #E53E3E;
+    font-weight: 600;
+  }
+  
+  .user-profile-view-details-btn {
+    color: #2C7A7B;
+    background: none;
+    border: 1px solid #2C7A7B;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .user-profile-view-details-btn:hover {
+    background-color: #2C7A7B;
+    color: white;
+  }
+  
+  .user-profile-loading,
+  .user-profile-error,
+  .user-profile-not-found,
+  .user-profile-no-requests {
+    padding: 32px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .user-profile-loading {
+    color: #2C7A7B;
+  }
+  
+  .user-profile-error {
+    color: #E53E3E;
+  }
+  
+  .user-profile-not-found {
+    color: #718096;
+  }
+  
+  .user-profile-no-requests {
+    color: #718096;
+    padding: 48px 24px;
+  }
+  
+  .user-profile-hint {
+    font-size: 14px;
+    margin-top: 8px;
+    color: #A0AEC0;
+  }

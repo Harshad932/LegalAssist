@@ -1,0 +1,135 @@
+/* UserLogin.css */
+
+.user-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #F7FAFC;
+    padding: 20px;
+  }
+  
+  .user-login-card {
+    width: 100%;
+    max-width: 420px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 32px;
+  }
+  
+  .user-login-header {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .user-login-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #1A365D;
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .user-login-subtitle {
+    color: #718096;
+    font-size: 14px;
+  }
+  
+  .user-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .user-login-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .user-login-form-group label {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2D3748;
+  }
+  
+  .user-login-input {
+    padding: 12px 14px;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #2D3748;
+    transition: border-color 0.2s ease;
+  }
+  
+  .user-login-input:focus {
+    outline: none;
+    border-color: #2C7A7B;
+    box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.1);
+  }
+  
+  .user-login-button {
+    padding: 12px;
+    background-color: #DD6B20;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 8px;
+  }
+  
+  .user-login-button:hover {
+    background-color: #C05621;
+  }
+  
+  .user-login-button:disabled {
+    background-color: #ED8936;
+    cursor: not-allowed;
+  }
+  
+  .user-login-links {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    align-items: center;
+  }
+  
+  .user-login-link {
+    color: #2C7A7B;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+  }
+  
+  .user-login-link:hover {
+    color: #1A365D;
+    text-decoration: underline;
+  }
+  
+  .user-login-divider {
+    color: #CBD5E0;
+  }
+  
+  .user-login-error {
+    background-color: #FFF5F5;
+    color: #E53E3E;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border-left: 3px solid #E53E3E;
+  }
+  
+  .user-login-footer {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 13px;
+    color: #718096;
+  }

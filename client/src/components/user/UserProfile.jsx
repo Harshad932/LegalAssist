@@ -1,83 +1,133 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LawyerSearch from "./LawyerSearch";
+import '../../assets/styles/user/UserProfile.css';
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState({
+    profile: true,
+    requests: true
+  });
   const [error, setError] = useState('');
   const [showLawyerSearch, setShowLawyerSearch] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async () => {
       try {
-        setLoading(true);
-        setError('');
-        
         const token = localStorage.getItem('userToken');
-        console.log('Token from storage:', token);
         
-        if (!token) {
-          throw new Error('No token found in storage');
-        }
-
-        const response = await axios.get('http://localhost:4000/api/users/me', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
+        // Fetch user profile
+        const profileResponse = await axios.get('http://localhost:4000/api/users/me', {
+          headers: { Authorization: `Bearer ${token}` }
         });
-        
-        console.log('Response data:', response.data);
-        setUserData(response.data.data); // Make sure to set the data to state
-      } catch (error) {
-        console.error('Full error:', error);
-        console.error('Error response:', error.response?.data);
-        setError(error.response?.data?.message || 'Failed to fetch profile');
+        setUserData(profileResponse.data.data);
+
+        // Fetch user's requests
+        const requestsResponse = await axios.get('http://localhost:4000/api/users/requests', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setRequests(requestsResponse.data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || 'Failed to fetch data');
       } finally {
-        setLoading(false);
+        setLoading({ profile: false, requests: false });
       }
     };
 
-    fetchUserData();
+    fetchData();
   }, []);
 
-  if (loading) return <div>Loading profile...</div>;
-  if (error) return <div className="text-red-500">{error}</div>;
-  if (!userData) return <div>No user data found</div>; // Additional safeguard
+  if (loading.profile) return <div className="user-profile-loading">Loading profile...</div>;
+  if (error) return <div className="user-profile-error">{error}</div>;
+  if (!userData) return <div className="user-profile-not-found">No user data found</div>;
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl">
-      <div className="bg-white rounded-lg shadow p-6">
-        <h1 className="text-2xl font-bold mb-4">Your Profile</h1>
+    <div className="user-profile-container">
+      {/* Profile Section */}
+      <div className="user-profile-card">
+        <div className="user-profile-header">
+          <h1>Your Profile</h1>
+          <p className="user-profile-subtitle">Welcome back, {userData.name}</p>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div>
-            <h3 className="font-semibold">Name</h3>
+        <div className="user-profile-details">
+          <div className="user-profile-detail-item">
+            <h3>Name</h3>
             <p>{userData.name}</p>
           </div>
-          <div>
-            <h3 className="font-semibold">Email</h3>
+          <div className="user-profile-detail-item">
+            <h3>Email</h3>
             <p>{userData.email}</p>
           </div>
-          <div>
-            <h3 className="font-semibold">Phone</h3>
+          <div className="user-profile-detail-item">
+            <h3>Phone</h3>
             <p>{userData.phone || 'Not provided'}</p>
           </div>
-          <div>
-            <h3 className="font-semibold">Role</h3>
+          <div className="user-profile-detail-item">
+            <h3>Role</h3>
             <p>{userData.role}</p>
           </div>
         </div>
 
-        <button
-          onClick={() => setShowLawyerSearch(!showLawyerSearch)}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          {showLawyerSearch ? 'Hide Lawyer Search' : 'Find a Lawyer'}
-        </button>
+        <div className="user-profile-action">
+          <button
+            onClick={() => setShowLawyerSearch(!showLawyerSearch)}
+            className="user-profile-find-lawyer-btn"
+          >
+            {showLawyerSearch ? 'Hide Lawyer Search' : 'Find a Lawyer'}
+          </button>
+        </div>
 
-        {showLawyerSearch && <LawyerSearch />}
+        {showLawyerSearch && <div className="user-profile-lawyer-search"><LawyerSearch /></div>}
+      </div>
+
+      {/* Case Requests Section */}
+      <div className="user-profile-requests-card">
+        <div className="user-profile-requests-header">
+          <h2>Your Case Requests</h2>
+        </div>
+        
+        {loading.requests ? (
+          <div className="user-profile-loading">Loading requests...</div>
+        ) : requests.length === 0 ? (
+          <div className="user-profile-no-requests">
+            <p>No requests found</p>
+            <p className="user-profile-hint">Use the "Find a Lawyer" button to create your first case request</p>
+          </div>
+        ) : (
+          <div className="user-profile-requests-list">
+            {requests.map(request => (
+              <div 
+                key={request._id} 
+                className="user-profile-request-item"
+                onClick={() => navigate(`/requests/${request._id}`)}
+              >
+                <div className="user-profile-request-content">
+                  <div className="user-profile-request-info">
+                    <h3>Case Token: {request.caseToken}</h3>
+                    <p className="user-profile-lawyer-name">
+                      Lawyer: {request.lawyer?.name || 'Unknown'}
+                    </p>
+                    <p className="user-profile-status">
+                      Status: <span className={`user-profile-status-${request.status}`}>
+                        {request.status}
+                      </span>
+                    </p>
+                  </div>
+                  <div className="user-profile-request-action">
+                    <button className="user-profile-view-details-btn">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

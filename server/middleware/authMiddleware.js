@@ -59,3 +59,13 @@ export const lawyerProtect = async (req, res, next) => {
   }
   next();
 };
+
+export const userProtect = async (req, res, next) => {
+  if (!req.user) {
+    return res.status(403).json({
+      success: false,
+      message: 'Not authorized as user'
+    });
+  }
+  next();
+};

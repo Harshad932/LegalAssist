@@ -1,0 +1,397 @@
+/* Case Details Styles */
+.lawyer-case-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    font-family: 'Open Sans', sans-serif;
+    color: #2D3748;
+    background-color: #F7FAFC;
+  }
+  
+  .lawyer-case-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+  
+  .lawyer-case-detail-title-section {
+    flex: 1;
+  }
+  
+  .lawyer-case-detail-back-link {
+    font-size: 0.875rem;
+    color: #4A5568;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+  }
+  
+  .lawyer-case-detail-back-link:hover {
+    color: #2C7A7B;
+  }
+  
+  .lawyer-case-detail-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: #1A365D;
+    margin: 0 0 0.25rem 0;
+  }
+  
+  .lawyer-case-detail-case-token {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    color: #718096;
+  }
+  
+  .lawyer-case-detail-actions {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .lawyer-case-detail-message-btn {
+    background-color: #DD6B20;
+    color: white;
+    border: none;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .lawyer-case-detail-message-btn:hover {
+    background-color: #C05621;
+  }
+  
+  .lawyer-case-detail-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .lawyer-case-detail-summary-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .lawyer-case-detail-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+  
+  .lawyer-case-detail-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #EDF2F7;
+    background-color: #F8FAFC;
+  }
+  
+  .lawyer-case-detail-card-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: #1A365D;
+    margin: 0;
+  }
+  
+  .lawyer-case-detail-card-content {
+    padding: 1.5rem;
+  }
+  
+  .lawyer-case-detail-info-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.25rem;
+  }
+  
+  @media (min-width: 640px) {
+    .lawyer-case-detail-info-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .lawyer-case-detail-info-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .lawyer-case-detail-info-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+  
+  .lawyer-case-detail-info-value {
+    font-size: 1rem;
+    color: #2D3748;
+  }
+  
+  .lawyer-case-detail-fir {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+  }
+  
+  .lawyer-case-detail-status,
+  .lawyer-case-detail-priority,
+  .lawyer-case-detail-hearing-status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  
+  .lawyer-case-detail-status-active,
+  .lawyer-case-detail-hearing-status-scheduled {
+    background-color: #E6FFFA;
+    color: #2C7A7B;
+  }
+  
+  .lawyer-case-detail-status-pending,
+  .lawyer-case-detail-hearing-status-pending {
+    background-color: #FFFAF0;
+    color: #DD6B20;
+  }
+  
+  .lawyer-case-detail-status-closed,
+  .lawyer-case-detail-hearing-status-completed {
+    background-color: #EBF4FF;
+    color: #3182CE;
+  }
+  
+  .lawyer-case-detail-status-suspended,
+  .lawyer-case-detail-hearing-status-canceled {
+    background-color: #FFF5F5;
+    color: #E53E3E;
+  }
+  
+  .lawyer-case-detail-priority-high {
+    background-color: #FFF5F5;
+    color: #E53E3E;
+  }
+  
+  .lawyer-case-detail-priority-medium {
+    background-color: #FFFAF0;
+    color: #DD6B20;
+  }
+  
+  .lawyer-case-detail-priority-low {
+    background-color: #EBF8FF;
+    color: #3182CE;
+  }
+  
+  .lawyer-case-detail-client-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .lawyer-case-detail-client-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #2D3748;
+  }
+  
+  .lawyer-case-detail-client-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  @media (min-width: 640px) {
+    .lawyer-case-detail-client-contact {
+      flex-direction: row;
+      gap: 1.5rem;
+    }
+  }
+  
+  .lawyer-case-detail-client-email,
+  .lawyer-case-detail-client-phone {
+    font-size: 0.875rem;
+  }
+  
+  .lawyer-case-detail-case-description {
+    margin-top: 1rem;
+  }
+  
+  .lawyer-case-detail-description-content {
+    line-height: 1.6;
+    margin-top: 0.5rem;
+    white-space: pre-wrap;
+    background-color: #F8FAFC;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    border-left: 3px solid #2C7A7B;
+  }
+  
+  .lawyer-case-detail-hearings-card {
+    margin-top: 1.5rem;
+  }
+  
+  .lawyer-case-detail-hearings-count {
+    background-color: #E6FFFA;
+    color: #2C7A7B;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+  }
+  
+  .lawyer-case-detail-table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .lawyer-case-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .lawyer-case-detail-table th {
+    background-color: #F9FAFB;
+    color: #718096;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  
+  .lawyer-case-detail-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #EDF2F7;
+    font-size: 0.875rem;
+    color: #4A5568;
+  }
+  
+  .lawyer-case-detail-table tr:hover {
+    background-color: #F7FAFC;
+  }
+  
+  .lawyer-case-detail-date-cell {
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  
+  .lawyer-case-detail-no-hearings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+    color: #718096;
+  }
+  
+  .lawyer-case-detail-no-hearings-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #A0AEC0;
+  }
+  
+  .lawyer-case-detail-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    color: #1A365D;
+    font-weight: 500;
+  }
+  
+  .lawyer-case-detail-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(26, 54, 93, 0.3);
+    border-radius: 50%;
+    border-top-color: #1A365D;
+    animation: lawyer-case-detail-spin 1s ease-in-out infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes lawyer-case-detail-spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .lawyer-case-detail-error,
+  .lawyer-case-detail-not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin: 2rem auto;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .lawyer-case-detail-error {
+    border-top: 4px solid #E53E3E;
+  }
+  
+  .lawyer-case-detail-not-found {
+    border-top: 4px solid #A0AEC0;
+  }
+  
+  .lawyer-case-detail-error-icon,
+  .lawyer-case-detail-not-found-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .lawyer-case-detail-error-icon {
+    background-color: #FED7D7;
+    color: #E53E3E;
+  }
+  
+  .lawyer-case-detail-not-found-icon {
+    background-color: #EDF2F7;
+    color: #718096;
+  }
+  
+  .lawyer-case-detail-error p,
+  .lawyer-case-detail-not-found p {
+    margin-bottom: 1.5rem;
+    color: #4A5568;
+    font-size: 1rem;
+  }
+  
+  .lawyer-case-detail-back-btn {
+    background-color: #2C7A7B;
+    color: white;
+    border: none;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .lawyer-case-detail-back-btn:hover {
+    background-color: #285E61;
+  }

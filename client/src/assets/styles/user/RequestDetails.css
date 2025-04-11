@@ -1,0 +1,190 @@
+/* Request Details Component Styles */
+.request-details-container {
+    max-width: 1024px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Open Sans', sans-serif;
+    color: #2D3748;
+  }
+  
+  .request-details-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+  }
+  
+  .request-details-back-button {
+    display: inline-flex;
+    align-items: center;
+    color: #1A365D;
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    transition: color 0.15s ease-in-out;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .request-details-back-button:hover {
+    color: #2C7A7B;
+    text-decoration: underline;
+  }
+  
+  .request-details-back-icon {
+    margin-right: 0.375rem;
+  }
+  
+  .request-details-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #1A365D;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  
+  .request-details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .request-details-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  }
+  
+  .request-details-section {
+    background-color: #F7FAFC;
+    border-radius: 0.375rem;
+    padding: 1.25rem;
+    border: 1px solid #EDF2F7;
+  }
+  
+  .request-details-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: #1A365D;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  
+  .request-details-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+  
+  .request-details-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  @media (min-width: 768px) {
+    .request-details-info-item {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+  
+  .request-details-info-label {
+    font-weight: 600;
+    min-width: 120px;
+    color: #4A5568;
+  }
+  
+  .request-details-info-value {
+    color: #2D3748;
+    word-break: break-word;
+  }
+  
+  .request-details-status {
+    display: inline-block;
+    padding: 0.25rem 0.625rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 0.025em;
+  }
+  
+  .request-details-status-pending {
+    background-color: #FEFCBF;
+    color: #744210;
+  }
+  
+  .request-details-status-accepted {
+    background-color: #C6F6D5;
+    color: #22543D;
+  }
+  
+  .request-details-status-rejected {
+    background-color: #FED7D7;
+    color: #822727;
+  }
+  
+  .request-details-case-content {
+    margin-top: 1.5rem;
+  }
+  
+  .request-details-case-details {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid #E2E8F0;
+    white-space: pre-line;
+    line-height: 1.5;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .request-details-message-button {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding: 0.625rem 1.25rem;
+    background-color: #1A365D;
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+  }
+  
+  .request-details-message-button:hover {
+    background-color: #2C7A7B;
+  }
+  
+  .request-details-message-icon {
+    margin-right: 0.5rem;
+  }
+  
+  .request-details-loading {
+    text-align: center;
+    padding: 3rem 0;
+    color: #4A5568;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .request-details-error {
+    text-align: center;
+    padding: 3rem 0;
+    color: #E53E3E;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .request-details-not-found {
+    text-align: center;
+    padding: 3rem 0;
+    color: #4A5568;
+    font-family: 'Open Sans', sans-serif;
+  }
