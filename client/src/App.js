@@ -15,6 +15,7 @@ import UserProfile from './components/user/UserProfile';
 import LawyerProfileView from './components/user/LawyerProfileView';
 import RequestDetails from './components/user/RequestDetails';
 import ClientMessagesPage from './components/user/ClientMessagePage';
+import LawyerSearchPage  from './components/user/LawyerSearch';
 
 import LawyerRegistration from './components/lawyer/LawyerRegistration';
 import LawyerLogin from './components/lawyer/LawyerLogin';
@@ -42,6 +43,7 @@ function App() {
         <Route path="/user/profile" element={<UserProfile/>} />
         <Route path="/user/lawyer-profile/:lawyerId" element={<LawyerProfileView/>} />
         <Route path="/requests/:requestId" element={<RequestDetails />} />
+        <Route path="/lawyer-search" element={<LawyerSearchPage />} />
 
         <Route path="/lawyer/registration" element={<LawyerRegistration/>} />
         <Route path="/lawyer/login" element={<LawyerLogin/>} />

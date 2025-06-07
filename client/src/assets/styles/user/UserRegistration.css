@@ -1,140 +1,246 @@
-/* UserRegistration.css */
+/* Legal Assist - Premium Registration Page Styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap');
 
 .user-registration-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #F7FAFC;
-    padding: 20px;
-  }
-  
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.user-registration-card {
+  max-width: 560px;
+  width: 90%;
+  margin: 40px auto;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(10, 36, 99, 0.1);
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-registration-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #0A2463, #15B097);
+}
+
+.user-registration-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.user-registration-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: #091540;
+  margin-bottom: 8px;
+  position: relative;
+  display: inline-block;
+}
+
+.user-registration-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #FFD166;
+  border-radius: 3px;
+}
+
+.user-registration-subtitle {
+  color: #6c757d;
+  font-size: 16px;
+  margin-top: 16px;
+}
+
+.user-registration-error {
+  background: rgba(255, 107, 107, 0.1);
+  border-left: 4px solid #FF6B6B;
+  color: #dc3545;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.user-registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.user-registration-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-registration-form-group label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1E2A3B;
+  display: flex;
+  align-items: center;
+}
+
+.user-registration-optional {
+  font-weight: 400;
+  font-size: 12px;
+  color: #6c757d;
+  margin-left: 4px;
+}
+
+.user-registration-input {
+  padding: 14px 16px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  color: #1E2A3B;
+  background: #f8f9fa;
+}
+
+.user-registration-input:focus {
+  outline: none;
+  border-color: #0A2463;
+  box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1);
+  background: #ffffff;
+}
+
+.user-registration-input::placeholder {
+  color: #adb5bd;
+}
+
+.user-registration-hint {
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: 4px;
+}
+
+.user-registration-terms {
+  font-size: 14px;
+  color: #6c757d;
+  text-align: center;
+  margin: 8px 0 24px;
+  line-height: 1.5;
+}
+
+.user-registration-link {
+  color: #15B097;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.user-registration-link:hover {
+  color: #0A2463;
+}
+
+.user-registration-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+.user-registration-link:hover::after {
+  width: 100%;
+}
+
+.user-registration-button {
+  background: linear-gradient(135deg, #0A2463, #15B097);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(10, 36, 99, 0.2);
+}
+
+.user-registration-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(10, 36, 99, 0.3);
+  background: linear-gradient(135deg, #091540, #0A2463);
+}
+
+.user-registration-button:disabled {
+  background: #ced4da;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.user-registration-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+.user-registration-button:hover::before {
+  left: 100%;
+}
+
+.user-registration-footer {
+  text-align: center;
+  margin-top: 32px;
+  color: #6c757d;
+  font-size: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .user-registration-card {
-    width: 100%;
-    max-width: 480px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 32px;
-  }
-  
-  .user-registration-header {
-    margin-bottom: 24px;
-    text-align: center;
+    width: 95%;
+    padding: 30px 20px;
+    margin: 20px auto;
   }
   
   .user-registration-header h2 {
-    font-family: 'Montserrat', sans-serif;
-    color: #1A365D;
-    font-size: 24px;
-    margin-bottom: 8px;
+    font-size: 28px;
   }
   
   .user-registration-subtitle {
-    color: #718096;
     font-size: 14px;
   }
-  
-  .user-registration-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .user-registration-form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  
-  .user-registration-form-group label {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #2D3748;
-  }
-  
-  .user-registration-input {
-    padding: 12px 14px;
-    border: 1px solid #E2E8F0;
-    border-radius: 6px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    color: #2D3748;
-    transition: border-color 0.2s ease;
-  }
-  
-  .user-registration-input:focus {
-    outline: none;
-    border-color: #2C7A7B;
-    box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.1);
+}
+
+@media (max-width: 576px) {
+  .user-registration-header h2 {
+    font-size: 24px;
   }
   
   .user-registration-button {
-    padding: 12px;
-    background-color: #DD6B20;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 8px;
+    padding: 14px;
   }
-  
-  .user-registration-button:hover {
-    background-color: #C05621;
-  }
-  
-  .user-registration-button:disabled {
-    background-color: #ED8936;
-    cursor: not-allowed;
-  }
-  
-  .user-registration-error {
-    background-color: #FFF5F5;
-    color: #E53E3E;
-    padding: 12px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    font-size: 14px;
-    border-left: 3px solid #E53E3E;
-  }
-  
-  .user-registration-hint {
-    font-size: 12px;
-    color: #718096;
-    margin-top: 2px;
-  }
-  
-  .user-registration-optional {
-    font-weight: normal;
-    font-size: 12px;
-    color: #718096;
-  }
-  
-  .user-registration-terms {
-    font-size: 13px;
-    color: #718096;
-    text-align: center;
-  }
-  
-  .user-registration-link {
-    color: #2C7A7B;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  
-  .user-registration-link:hover {
-    color: #1A365D;
-    text-decoration: underline;
-  }
-  
-  .user-registration-footer {
-    margin-top: 24px;
-    text-align: center;
-    font-size: 14px;
-    color: #4A5568;
-  }
+}

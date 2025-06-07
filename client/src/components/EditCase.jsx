@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Header from './Header'; // Import the Header component
 import '../assets/styles/EditCase.css';
 
 const EditCasePage = () => {
@@ -161,317 +162,345 @@ const EditCasePage = () => {
     }
   };
 
-  if (loading) return <div className="edit-loading-container">Loading case data...</div>;
-  if (error) return <div className="edit-error-message">{error}</div>;
+  if (loading) return (
+    <>
+      <Header />
+      <div className="edit-loading-container">
+        <div className="loading-animation">
+          <div className="spinner"></div>
+          <div>Loading case data...</div>
+        </div>
+      </div>
+    </>
+  );
+  
+  if (error) return (
+    <>
+      <Header />
+      <div className="edit-error-message">{error}</div>
+    </>
+  );
 
   return (
-    <div className="edit-container">
-      <h2 className="edit-page-title">Edit Case: {caseData.caseTitle}</h2>
-      <form onSubmit={handleSubmit} className="edit-form">
-        <div className="edit-card">
-          <div className="edit-card-header">
-            <h3 className="edit-section-title">Case Details</h3>
-          </div>
-          <div className="edit-card-body">
-            <div className="edit-row">
-              <div className="edit-column">
-                <label className="edit-label">Token Number</label>
-                <input
-                  type="text"
-                  className="edit-input edit-readonly"
-                  name="tokenNumber"
-                  value={caseData.tokenNumber}
-                  onChange={handleChange}
-                  readOnly
-                />
-              </div>
-              <div className="edit-column">
-                <label className="edit-label">Case Title</label>
-                <input
-                  type="text"
-                  className="edit-input"
-                  name="caseTitle"
-                  value={caseData.caseTitle}
-                  onChange={handleChange}
-                />
-              </div>
+    <>
+      <Header />
+      <div className="edit-container">
+        <h2 className="edit-page-title">Edit Case: {caseData.caseTitle}</h2>
+        <form onSubmit={handleSubmit} className="edit-form">
+          <div className="edit-card">
+            <div className="edit-card-header">
+              <h3 className="edit-section-title">Case Details</h3>
             </div>
-
-            <div className="edit-row">
-              <div className="edit-column">
-                <label className="edit-label">Case Type</label>
-                <input
-                  type="text"
-                  className="edit-input"
-                  name="caseType"
-                  value={caseData.caseType}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="edit-column">
-                <label className="edit-label">Court</label>
-                <input
-                  type="text"
-                  className="edit-input"
-                  name="court"
-                  value={caseData.court}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            <div className="edit-row">
-              <div className="edit-column">
-                <label className="edit-label">Judge</label>
-                <input
-                  type="text"
-                  className="edit-input"
-                  name="judge"
-                  value={caseData.judge}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="edit-column">
-                <label className="edit-label">FIR Number</label>
-                <input
-                  type="text"
-                  className="edit-input"
-                  name="firNumber"
-                  value={caseData.firNumber}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            <div className="edit-row">
-              <div className="edit-column">
-                <label className="edit-label">Petitioner</label>
-                <input
-                  type="text"
-                  className="edit-input"
-                  name="petitioner"
-                  value={caseData.petitioner}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="edit-column">
-                <label className="edit-label">Respondent</label>
-                <input
-                  type="text"
-                  className="edit-input"
-                  name="respondent"
-                  value={caseData.respondent}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
-            <div className="edit-row">
-              <div className="edit-column edit-column-third">
-                <label className="edit-label">Filing Date</label>
-                <input
-                  type="date"
-                  className="edit-input"
-                  name="filingDate"
-                  value={caseData.filingDate}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="edit-column edit-column-third">
-                <label className="edit-label">Status</label>
-                <select
-                  className="edit-select"
-                  name="status"
-                  value={caseData.status}
-                  onChange={handleChange}
-                >
-                  <option value="Pending">Pending</option>
-                  <option value="Active">Active</option>
-                  <option value="Disposed">Disposed</option>
-                  <option value="Closed">Closed</option>
-                </select>
-              </div>
-              <div className="edit-column edit-column-third">
-                <label className="edit-label">Priority</label>
-                <select
-                  className="edit-select"
-                  name="priority"
-                  value={caseData.priority}
-                  onChange={handleChange}
-                >
-                  <option value="Critical">Critical</option>
-                  <option value="High">High</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Low">Low</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Hearings Section */}
-        <div className="edit-card">
-          <div className="edit-card-header">
-            <h3 className="edit-section-title">Hearings (Optional)</h3>
-          </div>
-          <div className="edit-card-body">
-            {/* Existing Hearings */}
-            {caseData.hearings && caseData.hearings.length > 0 ? (
-              <div className="edit-hearings-section">
-                <h4 className="edit-subsection-title">Existing Hearings</h4>
-                <div className="edit-table-container">
-                  <table className="edit-table">
-                    <thead className="edit-table-header">
-                      <tr className="edit-table-row">
-                        <th className="edit-table-cell edit-table-header-cell">Date</th>
-                        <th className="edit-table-cell edit-table-header-cell">Description</th>
-                        <th className="edit-table-cell edit-table-header-cell">Judge Remarks</th>
-                        <th className="edit-table-cell edit-table-header-cell">Status</th>
-                        <th className="edit-table-cell edit-table-header-cell">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="edit-table-body">
-                      {caseData.hearings.map((hearing, index) => (
-                        <tr key={index} className="edit-table-row">
-                          <td className="edit-table-cell">
-                            <input
-                              type="date"
-                              className="edit-input edit-table-input"
-                              value={hearing.date}
-                              onChange={(e) => handleExistingHearingChange(index, 'date', e.target.value)}
-                            />
-                          </td>
-                          <td className="edit-table-cell">
-                            <input
-                              type="text"
-                              className="edit-input edit-table-input"
-                              value={hearing.description}
-                              onChange={(e) => handleExistingHearingChange(index, 'description', e.target.value)}
-                            />
-                          </td>
-                          <td className="edit-table-cell">
-                            <input
-                              type="text"
-                              className="edit-input edit-table-input"
-                              value={hearing.judgeRemarks}
-                              onChange={(e) => handleExistingHearingChange(index, 'judgeRemarks', e.target.value)}
-                            />
-                          </td>
-                          <td className="edit-table-cell">
-                            <select
-                              className="edit-select edit-table-select"
-                              value={hearing.status}
-                              onChange={(e) => handleExistingHearingChange(index, 'status', e.target.value)}
-                            >
-                              <option value="Scheduled">Scheduled</option>
-                              <option value="Completed">Completed</option>
-                              <option value="Postponed">Postponed</option>
-                              <option value="Cancelled">Cancelled</option>
-                            </select>
-                          </td>
-                          <td className="edit-table-cell">
-                            <button
-                              type="button"
-                              className="edit-button edit-button-danger"
-                              onClick={() => removeHearing(index)}
-                            >
-                              Remove
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+            <div className="edit-card-body">
+              <div className="edit-row">
+                <div className="edit-column">
+                  <label className="edit-label">Token Number</label>
+                  <input
+                    type="text"
+                    className="edit-input edit-readonly"
+                    name="tokenNumber"
+                    value={caseData.tokenNumber}
+                    onChange={handleChange}
+                    readOnly
+                  />
+                </div>
+                <div className="edit-column">
+                  <label className="edit-label">Case Title</label>
+                  <input
+                    type="text"
+                    className="edit-input"
+                    name="caseTitle"
+                    value={caseData.caseTitle}
+                    onChange={handleChange}
+                    placeholder="Enter case title"
+                  />
                 </div>
               </div>
-            ) : (
-              <div className="edit-no-hearings-message">No hearings have been added yet.</div>
-            )}
 
-            {/* Add New Hearing */}
-            <div className="edit-add-hearing-section">
-              <h4 className="edit-subsection-title">Add New Hearing (Optional)</h4>
               <div className="edit-row">
-                <div className="edit-column edit-column-quarter">
-                  <label className="edit-label">Date</label>
+                <div className="edit-column">
+                  <label className="edit-label">Case Type</label>
+                  <input
+                    type="text"
+                    className="edit-input"
+                    name="caseType"
+                    value={caseData.caseType}
+                    onChange={handleChange}
+                    placeholder="E.g., Civil, Criminal, Family"
+                  />
+                </div>
+                <div className="edit-column">
+                  <label className="edit-label">Court</label>
+                  <input
+                    type="text"
+                    className="edit-input"
+                    name="court"
+                    value={caseData.court}
+                    onChange={handleChange}
+                    placeholder="Court name"
+                  />
+                </div>
+              </div>
+
+              <div className="edit-row">
+                <div className="edit-column">
+                  <label className="edit-label">Judge</label>
+                  <input
+                    type="text"
+                    className="edit-input"
+                    name="judge"
+                    value={caseData.judge}
+                    onChange={handleChange}
+                    placeholder="Presiding judge name"
+                  />
+                </div>
+                <div className="edit-column">
+                  <label className="edit-label">FIR Number</label>
+                  <input
+                    type="text"
+                    className="edit-input"
+                    name="firNumber"
+                    value={caseData.firNumber}
+                    onChange={handleChange}
+                    placeholder="FIR number if applicable"
+                  />
+                </div>
+              </div>
+
+              <div className="edit-row">
+                <div className="edit-column">
+                  <label className="edit-label">Petitioner</label>
+                  <input
+                    type="text"
+                    className="edit-input"
+                    name="petitioner"
+                    value={caseData.petitioner}
+                    onChange={handleChange}
+                    placeholder="Petitioner name"
+                  />
+                </div>
+                <div className="edit-column">
+                  <label className="edit-label">Respondent</label>
+                  <input
+                    type="text"
+                    className="edit-input"
+                    name="respondent"
+                    value={caseData.respondent}
+                    onChange={handleChange}
+                    placeholder="Respondent name"
+                  />
+                </div>
+              </div>
+
+              <div className="edit-row">
+                <div className="edit-column edit-column-third">
+                  <label className="edit-label">Filing Date</label>
                   <input
                     type="date"
                     className="edit-input"
-                    name="date"
-                    value={newHearing.date}
-                    onChange={handleHearingChange}
+                    name="filingDate"
+                    value={caseData.filingDate}
+                    onChange={handleChange}
                   />
                 </div>
-                <div className="edit-column edit-column-quarter">
-                  <label className="edit-label">Description</label>
-                  <input
-                    type="text"
-                    className="edit-input"
-                    name="description"
-                    value={newHearing.description}
-                    onChange={handleHearingChange}
-                    placeholder="Hearing description"
-                  />
-                </div>
-                <div className="edit-column edit-column-quarter">
-                  <label className="edit-label">Judge Remarks</label>
-                  <input
-                    type="text"
-                    className="edit-input"
-                    name="judgeRemarks"
-                    value={newHearing.judgeRemarks}
-                    onChange={handleHearingChange}
-                    placeholder="Judge remarks (optional)"
-                  />
-                </div>
-                <div className="edit-column edit-column-quarter">
+                <div className="edit-column edit-column-third">
                   <label className="edit-label">Status</label>
                   <select
                     className="edit-select"
                     name="status"
-                    value={newHearing.status}
-                    onChange={handleHearingChange}
+                    value={caseData.status}
+                    onChange={handleChange}
                   >
-                    <option value="Scheduled">Scheduled</option>
-                    <option value="Completed">Completed</option>
-                    <option value="Postponed">Postponed</option>
-                    <option value="Cancelled">Cancelled</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Active">Active</option>
+                    <option value="Disposed">Disposed</option>
+                    <option value="Closed">Closed</option>
+                  </select>
+                </div>
+                <div className="edit-column edit-column-third">
+                  <label className="edit-label">Priority</label>
+                  <select
+                    className="edit-select"
+                    name="priority"
+                    value={caseData.priority}
+                    onChange={handleChange}
+                  >
+                    <option value="Critical">Critical</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
                   </select>
                 </div>
               </div>
-              <button
-                type="button"
-                className="edit-button edit-button-primary edit-add-hearing-button"
-                onClick={addHearing}
-                disabled={!newHearing.date || !newHearing.description}
-              >
-                Add Hearing
-              </button>
-              <div className="edit-helper-text">
-                * Adding hearings is optional. You can submit the form without adding any hearings.
+            </div>
+          </div>
+
+          {/* Hearings Section */}
+          <div className="edit-card">
+            <div className="edit-card-header">
+              <h3 className="edit-section-title">Hearings</h3>
+            </div>
+            <div className="edit-card-body">
+              {/* Existing Hearings */}
+              {caseData.hearings && caseData.hearings.length > 0 ? (
+                <div className="edit-hearings-section">
+                  <h4 className="edit-subsection-title">Existing Hearings</h4>
+                  <div className="edit-table-container">
+                    <table className="edit-table">
+                      <thead className="edit-table-header">
+                        <tr className="edit-table-row">
+                          <th className="edit-table-cell edit-table-header-cell">Date</th>
+                          <th className="edit-table-cell edit-table-header-cell">Description</th>
+                          <th className="edit-table-cell edit-table-header-cell">Judge Remarks</th>
+                          <th className="edit-table-cell edit-table-header-cell">Status</th>
+                          <th className="edit-table-cell edit-table-header-cell">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="edit-table-body">
+                        {caseData.hearings.map((hearing, index) => (
+                          <tr key={index} className="edit-table-row">
+                            <td className="edit-table-cell">
+                              <input
+                                type="date"
+                                className="edit-input edit-table-input"
+                                value={hearing.date}
+                                onChange={(e) => handleExistingHearingChange(index, 'date', e.target.value)}
+                              />
+                            </td>
+                            <td className="edit-table-cell">
+                              <input
+                                type="text"
+                                className="edit-input edit-table-input"
+                                value={hearing.description}
+                                onChange={(e) => handleExistingHearingChange(index, 'description', e.target.value)}
+                              />
+                            </td>
+                            <td className="edit-table-cell">
+                              <input
+                                type="text"
+                                className="edit-input edit-table-input"
+                                value={hearing.judgeRemarks}
+                                onChange={(e) => handleExistingHearingChange(index, 'judgeRemarks', e.target.value)}
+                              />
+                            </td>
+                            <td className="edit-table-cell">
+                              <select
+                                className="edit-select edit-table-select"
+                                value={hearing.status}
+                                onChange={(e) => handleExistingHearingChange(index, 'status', e.target.value)}
+                              >
+                                <option value="Scheduled">Scheduled</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Postponed">Postponed</option>
+                                <option value="Cancelled">Cancelled</option>
+                              </select>
+                            </td>
+                            <td className="edit-table-cell">
+                              <button
+                                type="button"
+                                className="edit-button edit-button-danger"
+                                onClick={() => removeHearing(index)}
+                              >
+                                Remove
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ) : (
+                <div className="edit-no-hearings-message">
+                  No hearings have been added yet.
+                </div>
+              )}
+
+              {/* Add New Hearing */}
+              <div className="edit-add-hearing-section">
+                <h4 className="edit-subsection-title">Add New Hearing</h4>
+                <div className="edit-row">
+                  <div className="edit-column edit-column-quarter">
+                    <label className="edit-label">Date</label>
+                    <input
+                      type="date"
+                      className="edit-input"
+                      name="date"
+                      value={newHearing.date}
+                      onChange={handleHearingChange}
+                    />
+                  </div>
+                  <div className="edit-column edit-column-quarter">
+                    <label className="edit-label">Description</label>
+                    <input
+                      type="text"
+                      className="edit-input"
+                      name="description"
+                      value={newHearing.description}
+                      onChange={handleHearingChange}
+                      placeholder="Hearing purpose/details"
+                    />
+                  </div>
+                  <div className="edit-column edit-column-quarter">
+                    <label className="edit-label">Judge Remarks</label>
+                    <input
+                      type="text"
+                      className="edit-input"
+                      name="judgeRemarks"
+                      value={newHearing.judgeRemarks}
+                      onChange={handleHearingChange}
+                      placeholder="Judge remarks (optional)"
+                    />
+                  </div>
+                  <div className="edit-column edit-column-quarter">
+                    <label className="edit-label">Status</label>
+                    <select
+                      className="edit-select"
+                      name="status"
+                      value={newHearing.status}
+                      onChange={handleHearingChange}
+                    >
+                      <option value="Scheduled">Scheduled</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Postponed">Postponed</option>
+                      <option value="Cancelled">Cancelled</option>
+                    </select>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className="edit-button edit-button-primary edit-add-hearing-button"
+                  onClick={addHearing}
+                  disabled={!newHearing.date || !newHearing.description}
+                >
+                  Add Hearing
+                </button>
+                <div className="edit-helper-text">
+                  * Both hearing date and description are required to add a hearing.
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="edit-actions">
-          <button
-            type="button"
-            className="edit-button edit-button-secondary"
-            onClick={() => navigate('/admin/cases')}
-          >
-            Cancel
-          </button>
-          <button 
-            type="submit" 
-            className="edit-button edit-button-success" 
-            disabled={loading}
-          >
-            {loading ? 'Saving...' : 'Save Changes'}
-          </button>
-        </div>
-      </form>
-    </div>
+          <div className="edit-actions">
+            <button
+              type="button"
+              className="edit-button edit-button-secondary"
+              onClick={() => navigate('/admin/cases')}
+            >
+              Cancel
+            </button>
+            <button 
+              type="submit" 
+              className="edit-button edit-button-success" 
+              disabled={loading}
+            >
+              {loading ? 'Saving...' : 'Save Changes'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

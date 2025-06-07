@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import UserHeader from '../../components/user/UserHeader';
 import '../../assets/styles/user/LawyerProfileView.css';
 
 const LawyerProfileView = () => {
@@ -110,54 +111,95 @@ const LawyerProfileView = () => {
     }
   };
 
-  if (loading.profile) return <div className="lawyer-profile-view-loading">Loading lawyer details...</div>;
-  if (!lawyer) return <div className="lawyer-profile-view-loading">Lawyer not found</div>;
+  if (loading.profile) return (
+    <>
+      <UserHeader />
+      <div className="lawyer-profile-loading">
+        <div className="lawyer-profile-loading-spinner"></div>
+        <p>Loading lawyer profile...</p>
+      </div>
+    </>
+  );
+  
+  if (!lawyer) return (
+    <>
+      <UserHeader />
+      <div className="lawyer-profile-not-found">
+        <div className="lawyer-profile-not-found-icon">⚠️</div>
+        <h2>Lawyer Not Found</h2>
+        <p>The lawyer profile you're looking for doesn't exist or may have been removed.</p>
+        <button onClick={() => navigate('/lawyers')} className="lawyer-profile-back-button">
+          Browse Lawyers
+        </button>
+      </div>
+    </>
+  );
 
   return (
-    <div className="lawyer-profile-view-container">
-      <div className="lawyer-profile-view-card">
-        {/* Lawyer Profile Header */}
-        <div className="lawyer-profile-view-header">
-          <h1 className="lawyer-profile-view-title">{lawyer.name}</h1>
-          <div className="lawyer-profile-view-badge-container">
-            <div className="lawyer-profile-view-badge lawyer-profile-view-badge-primary">
-              {lawyer.specialization.join(', ')}
+    <>
+      <UserHeader />
+      <div className="lawyer-profile-container">
+        <div className="lawyer-profile-header">
+          <div className="lawyer-profile-header-content">
+            <div className="lawyer-profile-avatar">
+              {lawyer.name.charAt(0)}
             </div>
-            <div className="lawyer-profile-view-badge lawyer-profile-view-badge-success">
-              {lawyer.experience}+ years experience
-            </div>
-            <div className="lawyer-profile-view-badge lawyer-profile-view-badge-accent">
-              ₹{lawyer.hourlyRate}/hour
+            <div className="lawyer-profile-title-container">
+              <h1 className="lawyer-profile-name">{lawyer.name}</h1>
+              <div className="lawyer-profile-badges">
+                <span className="lawyer-profile-badge lawyer-profile-badge-specialty">
+                  {lawyer.specialization.join(', ')}
+                </span>
+                <span className="lawyer-profile-badge lawyer-profile-badge-experience">
+                  {lawyer.experience}+ years experience
+                </span>
+                <span className="lawyer-profile-badge lawyer-profile-badge-rate">
+                  ₹{lawyer.hourlyRate}/hour
+                </span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="lawyer-profile-view-content">
-          {/* Lawyer Details Column */}
-          <div>
-            <div className="lawyer-profile-view-section">
-              <h2 className="lawyer-profile-view-section-title">Professional Details</h2>
-              <div>
-                <p className="lawyer-profile-view-detail">
-                  <span className="lawyer-profile-view-detail-label">Bar Association ID:</span> 
-                  {lawyer.barAssociationId}
-                </p>
-                <p className="lawyer-profile-view-detail">
-                  <span className="lawyer-profile-view-detail-label">Location:</span> 
-                  {lawyer.location}
-                </p>
-                <p className="lawyer-profile-view-detail">
-                  <span className="lawyer-profile-view-detail-label">Availability:</span> 
-                  {lawyer.availability ? 'Available' : 'Not Available'}
-                </p>
+        <div className="lawyer-profile-content">
+          <div className="lawyer-profile-sidebar">
+            <div className="lawyer-profile-card">
+              <h2 className="lawyer-profile-card-title">Professional Details</h2>
+              <div className="lawyer-profile-detail-item">
+                <span className="lawyer-profile-detail-icon">🏛️</span>
+                <div className="lawyer-profile-detail-content">
+                  <span className="lawyer-profile-detail-label">Bar Association ID</span>
+                  <span className="lawyer-profile-detail-value">{lawyer.barAssociationId}</span>
+                </div>
+              </div>
+              <div className="lawyer-profile-detail-item">
+                <span className="lawyer-profile-detail-icon">📍</span>
+                <div className="lawyer-profile-detail-content">
+                  <span className="lawyer-profile-detail-label">Location</span>
+                  <span className="lawyer-profile-detail-value">{lawyer.location}</span>
+                </div>
+              </div>
+              <div className="lawyer-profile-detail-item">
+                <span className="lawyer-profile-detail-icon">
+                  {lawyer.availability ? '✅' : '⏱️'}
+                </span>
+                <div className="lawyer-profile-detail-content">
+                  <span className="lawyer-profile-detail-label">Availability</span>
+                  <span className="lawyer-profile-detail-value lawyer-profile-availability">
+                    {lawyer.availability ? 
+                      <span className="lawyer-profile-available">Available</span> : 
+                      <span className="lawyer-profile-unavailable">Not Available</span>
+                    }
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div className="lawyer-profile-view-section">
-              <h2 className="lawyer-profile-view-section-title">Languages</h2>
-              <div className="lawyer-profile-view-tags">
+            <div className="lawyer-profile-card">
+              <h2 className="lawyer-profile-card-title">Languages</h2>
+              <div className="lawyer-profile-languages">
                 {lawyer.languages?.map((lang, i) => (
-                  <span key={i} className="lawyer-profile-view-tag">
+                  <span key={i} className="lawyer-profile-language-tag">
                     {lang}
                   </span>
                 ))}
@@ -165,97 +207,144 @@ const LawyerProfileView = () => {
             </div>
           </div>
 
-          {/* Request Form Column */}
-          <div className="lawyer-profile-view-form">
-            <h2 className="lawyer-profile-view-form-title">Request Consultation</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="lawyer-profile-view-form-group">
-                <label className="lawyer-profile-view-form-label">Case Token Number*</label>
-                <div className="lawyer-profile-view-form-input-wrapper">
-                  <input
-                    type="text"
-                    name="caseToken"
-                    value={formData.caseToken}
-                    onChange={handleChange}
-                    onBlur={validateCaseToken}
-                    required
-                    className="lawyer-profile-view-form-input"
-                  />
-                  {loading.validation && (
-                    <div className="lawyer-profile-view-form-spinner"></div>
+          <div className="lawyer-profile-main">
+            <div className="lawyer-profile-form-container">
+              <div className="lawyer-profile-form-header">
+                <h2 className="lawyer-profile-form-title">Request Consultation</h2>
+                <p className="lawyer-profile-form-subtitle">
+                  Fill out the form below to request a consultation with {lawyer.name.split(' ')[0]}
+                </p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="lawyer-profile-form">
+                <div className="lawyer-profile-form-group">
+                  <label className="lawyer-profile-form-label">
+                    Case Token Number<span className="lawyer-profile-required">*</span>
+                  </label>
+                  <div className="lawyer-profile-form-input-wrapper">
+                    <input
+                      type="text"
+                      name="caseToken"
+                      value={formData.caseToken}
+                      onChange={handleChange}
+                      onBlur={validateCaseToken}
+                      required
+                      className={`lawyer-profile-form-input ${
+                        validation.isValidCase === true ? 'lawyer-profile-input-valid' :
+                        validation.isValidCase === false ? 'lawyer-profile-input-error' : ''
+                      }`}
+                      placeholder="Enter your case token"
+                    />
+                    {loading.validation && (
+                      <div className="lawyer-profile-input-spinner"></div>
+                    )}
+                    {validation.isValidCase === true && (
+                      <div className="lawyer-profile-input-check">✓</div>
+                    )}
+                  </div>
+                  {validation.isValidCase === false && (
+                    <div className="lawyer-profile-input-feedback lawyer-profile-input-error-message">
+                      {tokenError || 'Invalid case token'}
+                    </div>
+                  )}
+                  {validation.isValidCase === true && (
+                    <div className="lawyer-profile-input-feedback lawyer-profile-input-success-message">
+                      Case token verified successfully
+                    </div>
                   )}
                 </div>
-                {formData.caseToken && (
-                  <div className={`lawyer-profile-view-feedback ${
-                    validation.isValidCase ? 'lawyer-profile-view-feedback-success' : 'lawyer-profile-view-feedback-error'
-                  }`}>
-                    {validation.isValidCase === true && '✓ Valid case token'}
-                    {validation.isValidCase === false && `✗ ${tokenError || 'Invalid case token'}`}
+
+                <div className="lawyer-profile-form-row">
+                  <div className="lawyer-profile-form-group">
+                    <label className="lawyer-profile-form-label">
+                      Your Name<span className="lawyer-profile-required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="clientName"
+                      value={formData.clientName}
+                      onChange={handleChange}
+                      required
+                      className="lawyer-profile-form-input"
+                      placeholder="Full name"
+                    />
                   </div>
-                )}
-              </div>
 
-              <div className="lawyer-profile-view-form-group">
-                <label className="lawyer-profile-view-form-label">Your Name*</label>
-                <input
-                  type="text"
-                  name="clientName"
-                  value={formData.clientName}
-                  onChange={handleChange}
-                  required
-                  className="lawyer-profile-view-form-input"
-                />
-              </div>
+                  <div className="lawyer-profile-form-group">
+                    <label className="lawyer-profile-form-label">
+                      Your Email<span className="lawyer-profile-required">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="clientEmail"
+                      value={formData.clientEmail}
+                      onChange={handleChange}
+                      required
+                      className="lawyer-profile-form-input"
+                      placeholder="email@example.com"
+                    />
+                  </div>
+                </div>
 
-              <div className="lawyer-profile-view-form-group">
-                <label className="lawyer-profile-view-form-label">Your Email*</label>
-                <input
-                  type="email"
-                  name="clientEmail"
-                  value={formData.clientEmail}
-                  onChange={handleChange}
-                  required
-                  className="lawyer-profile-view-form-input"
-                />
-              </div>
+                <div className="lawyer-profile-form-group">
+                  <label className="lawyer-profile-form-label">
+                    Your Phone
+                  </label>
+                  <input
+                    type="tel"
+                    name="clientPhone"
+                    value={formData.clientPhone}
+                    onChange={handleChange}
+                    className="lawyer-profile-form-input"
+                    placeholder="+91 9876543210"
+                  />
+                </div>
 
-              <div className="lawyer-profile-view-form-group">
-                <label className="lawyer-profile-view-form-label">Your Phone</label>
-                <input
-                  type="tel"
-                  name="clientPhone"
-                  value={formData.clientPhone}
-                  onChange={handleChange}
-                  className="lawyer-profile-view-form-input"
-                />
-              </div>
+                <div className="lawyer-profile-form-group">
+                  <label className="lawyer-profile-form-label">
+                    Case Details<span className="lawyer-profile-required">*</span>
+                  </label>
+                  <textarea
+                    name="caseDetails"
+                    value={formData.caseDetails}
+                    onChange={handleChange}
+                    rows="5"
+                    required
+                    className="lawyer-profile-form-textarea"
+                    placeholder="Provide a brief description of your case..."
+                  />
+                </div>
 
-              <div className="lawyer-profile-view-form-group">
-                <label className="lawyer-profile-view-form-label">Case Details*</label>
-                <textarea
-                  name="caseDetails"
-                  value={formData.caseDetails}
-                  onChange={handleChange}
-                  rows="5"
-                  required
-                  className="lawyer-profile-view-form-textarea"
-                />
-              </div>
+                {error && <div className="lawyer-profile-form-error">{error}</div>}
 
-              {error && <div className="lawyer-profile-view-error">{error}</div>}
-
-              <button
-                type="submit"
-                disabled={loading.submission || !validation.isValidCase}
-                className="lawyer-profile-view-submit-button"
-              >
-                {loading.submission ? 'Sending...' : 'Send Request'}
-              </button>
-            </form>
+                <div className="lawyer-profile-form-footer">
+                  <button
+                    type="submit"
+                    disabled={loading.submission || !validation.isValidCase}
+                    className="lawyer-profile-submit-button"
+                  >
+                    {loading.submission ? (
+                      <>
+                        <span className="lawyer-profile-button-spinner"></span>
+                        Sending Request...
+                      </>
+                    ) : (
+                      <>
+                        Send Consultation Request
+                        <span className="lawyer-profile-button-arrow">→</span>
+                      </>
+                    )}
+                  </button>
+                  <p className="lawyer-profile-form-disclaimer">
+                    By submitting this form, you agree to our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>
+                  </p>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

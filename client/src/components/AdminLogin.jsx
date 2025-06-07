@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 import '../assets/styles/AdminLogin.css';
 
 const AdminLogin = () => {
@@ -60,82 +61,94 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-bg-animation">
-        {[...Array(10)].map((_, i) => (
-          <div key={i} className="login-cube"></div>
-        ))}
-      </div>
+    <>
+      <Header />
       
-      <div className="login-header">
-        <div className="login-logo">
-          <span className="logo-text">Legal</span>
-          <span className="logo-highlight">Assist</span>
+      <div className="admin-login-container">
+        <div className="admin-login-bg-animation">
+          {[...Array(10)].map((_, i) => (
+            <div key={i} className="admin-login-cube"></div>
+          ))}
         </div>
-        <div className="login-back-link" onClick={() => navigate('/')}>
-          <i className="login-back-icon">←</i> Back to Main Site
-        </div>
-      </div>
-      
-      <div className={`login-form-container ${animation ? 'animate-in' : ''}`}>
-        <div className="login-card-3d-wrapper">
-          <div className="login-card-front">
-            <div className="login-title">Admin Portal</div>
-            
-            {notification.message && (
-              <div className={`login-notification login-notification-${notification.type}`}>
-                {notification.message}
-              </div>
-            )}
-            
-            <form className="login-form" onSubmit={handleSubmit}>
-              <div className="login-form-group">
-                <label className="login-label" htmlFor="username">Username</label>
-                <div className="login-input-container">
-                  <input
-                    className="login-input"
-                    type="text"
-                    id="username"
-                    name="username"
-                    value={publicUser.username}
-                    onChange={handlePublicInputChange}
-                    required
-                  />
-                  <div className="login-input-focus-effect"></div>
-                </div>
+        
+        <div className={`admin-login-form-container ${animation ? 'animate-in' : ''}`}>
+          <div className="admin-login-card-wrapper">
+            <div className="admin-login-card">
+              <div className="admin-login-header">
+                <div className="admin-login-icon">⚖️</div>
+                <h1 className="admin-login-title">
+                  Admin <span className="admin-login-title-accent">Portal</span>
+                </h1>
+                <p className="admin-login-subtitle">Secure access for authorized personnel</p>
               </div>
               
-              <div className="login-form-group">
-                <label className="login-label" htmlFor="password">Password</label>
-                <div className="login-input-container">
-                  <input
-                    className="login-input"
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={publicUser.password}
-                    onChange={handlePublicInputChange}
-                    required
-                  />
-                  <div className="login-input-focus-effect"></div>
+              {notification.message && (
+                <div className={`admin-login-notification admin-login-notification-${notification.type}`}>
+                  <div className="admin-login-notification-icon">
+                    {notification.type === 'success' ? '✓' : '!'}
+                  </div>
+                  <p>{notification.message}</p>
+                </div>
+              )}
+              
+              <form className="admin-login-form" onSubmit={handleSubmit}>
+                <div className="admin-login-form-group">
+                  <label className="admin-login-label" htmlFor="username">Username</label>
+                  <div className="admin-login-input-container">
+                    <div className="admin-login-input-icon">👤</div>
+                    <input
+                      className="admin-login-input"
+                      type="text"
+                      id="username"
+                      name="username"
+                      value={publicUser.username}
+                      onChange={handlePublicInputChange}
+                      required
+                      placeholder="Enter your username"
+                    />
+                    <div className="admin-login-input-focus-effect"></div>
+                  </div>
+                </div>
+                
+                <div className="admin-login-form-group">
+                  <label className="admin-login-label" htmlFor="password">Password</label>
+                  <div className="admin-login-input-container">
+                    <div className="admin-login-input-icon">🔒</div>
+                    <input
+                      className="admin-login-input"
+                      type="password"
+                      id="password"
+                      name="password"
+                      value={publicUser.password}
+                      onChange={handlePublicInputChange}
+                      required
+                      placeholder="Enter your password"
+                    />
+                    <div className="admin-login-input-focus-effect"></div>
+                  </div>
+                </div>
+                
+                <button className="admin-login-submit-btn" type="submit" disabled={loading}>
+                  {loading ? 
+                    <div className="admin-login-spinner"></div> : 
+                    <span className="admin-login-btn-text">Sign In <span className="admin-login-btn-arrow">→</span></span>
+                  }
+                </button>
+              </form>
+              
+              <div className="admin-login-footer">
+                <div className="admin-login-forgot-password" onClick={handleForgotPassword}>
+                  Forgot password?
+                </div>
+                <div className="admin-login-back-link" onClick={() => navigate('/')}>
+                  <span className="admin-login-back-icon">←</span> Back to main site
                 </div>
               </div>
-              
-              <button className="login-submit-btn" type="submit" disabled={loading}>
-                {loading ? 
-                  <div className="login-spinner"></div> : 
-                  <span className="login-btn-text">Sign In</span>
-                }
-              </button>
-            </form>
-            
-            <div className="login-forgot-password" onClick={handleForgotPassword}>
-              Forgot password?
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

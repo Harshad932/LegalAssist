@@ -1,0 +1,271 @@
+/* Legal Assist - Premium Header Styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap');
+
+.lawyer-header {
+  background: linear-gradient(to right, #0A2463, #091540);
+  padding: 16px 0;
+  box-shadow: 0 4px 20px rgba(10, 36, 99, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lawyer-header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+/* Logo Section */
+.lawyer-header-logo {
+  position: relative;
+}
+
+.lawyer-header-logo a {
+  display: flex;
+  text-decoration: none;
+}
+
+.lawyer-header-logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lawyer-header-logo-symbol {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.lawyer-header-title-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.lawyer-header-logo-text {
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.lawyer-header-logo-accent {
+  color: #FFD166;
+  position: relative;
+}
+
+.lawyer-header-tagline {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: -2px;
+}
+
+/* Navigation Section */
+.lawyer-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.lawyer-header-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 30px;
+}
+
+.lawyer-header-menu-item {
+  position: relative;
+}
+
+.lawyer-header-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  padding: 8px 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.lawyer-header-link-highlight {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #FF6B6B, #FF8E8E);
+  transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: -1;
+  border-radius: 2px;
+}
+
+.lawyer-header-link:hover {
+  color: #FFFFFF;
+}
+
+.lawyer-header-link:hover .lawyer-header-link-highlight,
+.lawyer-header-link-active .lawyer-header-link-highlight {
+  width: 100%;
+}
+
+.lawyer-header-link-active {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+/* Authentication Buttons */
+.lawyer-header-auth {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.lawyer-header-auth-link {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lawyer-header-login {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.lawyer-header-login:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.lawyer-header-register {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  color: #FFFFFF;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.lawyer-header-register:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+}
+
+.lawyer-header-register-arrow {
+  transition: transform 0.3s ease;
+}
+
+.lawyer-header-register:hover .lawyer-header-register-arrow {
+  transform: translateX(4px);
+}
+
+/* Mobile Menu Toggle */
+.lawyer-header-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 110;
+}
+
+.lawyer-header-mobile-line {
+  width: 24px;
+  height: 2px;
+  background-color: #FFFFFF;
+  transition: all 0.3s;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .lawyer-header-mobile-toggle {
+    display: flex;
+  }
+  
+  .lawyer-header-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 300px;
+    background: linear-gradient(135deg, #091540, #0A2463);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 90px 30px 40px;
+    transition: right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.25);
+    gap: 50px;
+    overflow-y: auto;
+  }
+  
+  .lawyer-header-nav-active {
+    right: 0;
+  }
+  
+  .lawyer-header-menu {
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+  }
+  
+  .lawyer-header-menu-item {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .lawyer-header-link {
+    padding: 16px 0;
+    font-size: 16px;
+  }
+  
+  .lawyer-header-auth {
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+  }
+  
+  .lawyer-header-auth-link {
+    width: 100%;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .lawyer-header-logo-text {
+    font-size: 20px;
+  }
+  
+  .lawyer-header-tagline {
+    display: none;
+  }
+}

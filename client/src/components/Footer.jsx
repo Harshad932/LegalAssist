@@ -3,72 +3,95 @@ import { Link } from 'react-router-dom';
 import '../assets/styles/Footer.css';
 
 const Footer = () => {
-  // Function to handle scrolling to sections
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <footer>
-      <div className="home-container">
-        <div className="footer-content">
-          <div className="footer-column">
-            <h3>LegalAssist</h3>
-            <p>Simplifying legal access for everyone through technology and innovation.</p>
-          </div>
-          <div className="footer-column">
-            <h3>Quick Links</h3>
-            <ul>
-              <li>
-                <button 
-                  onClick={() => scrollToSection('features')} 
-                  className="footer-nav-button"
-                >
-                  Features
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => scrollToSection('how-it-works')} 
-                  className="footer-nav-button"
-                >
-                  How It Works
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => scrollToSection('track-case')} 
-                  className="footer-nav-button"
-                >
-                  Track Case
-                </button>
-              </li>
-              <li><Link to="/chatbot">AI Assistant</Link></li>
-            </ul>
-          </div>
-          <div className="footer-column">
-            <h3>Resources</h3>
-            <ul>
-              <li><Link to="/documents">Legal Documents</Link></li>
-              <li><Link to="/faqs">FAQs</Link></li>
-              <li><Link to="/privacy">Privacy Policy</Link></li>
-              <li><Link to="/terms">Terms of Service</Link></li>
-            </ul>
-          </div>
-          <div className="footer-column">
-            <h3>Contact Us</h3>
-            <ul>
-              <li>Email: info@legalassist.com</li>
-              <li>Phone: +91 8767260519</li>
-              <li>Address: PVG, Pune</li>
-            </ul>
+    <footer className="footer">
+      <div className="footer-top">
+        <div className="footer-container">
+          <div className="footer-columns">
+            <div className="footer-column">
+              <div className="footer-logo">
+                <div className="logo-icon">⚖️</div>
+                <div className="logo-text">
+                  <span className="logo-name">Legal<span className="logo-accent">Assist</span></span>
+                  <span className="logo-tagline">Justice Made Simple</span>
+                </div>
+              </div>
+              <p className="footer-description">
+                Empowering citizens with accessible legal solutions through technology and expert guidance.
+              </p>
+              <div className="footer-social">
+                <a href="#" className="social-link" aria-label="Facebook">
+                  <span className="social-icon">📱</span>
+                </a>
+                <a href="#" className="social-link" aria-label="Twitter">
+                  <span className="social-icon">📢</span>
+                </a>
+                <a href="#" className="social-link" aria-label="LinkedIn">
+                  <span className="social-icon">💼</span>
+                </a>
+                <a href="#" className="social-link" aria-label="Instagram">
+                  <span className="social-icon">📷</span>
+                </a>
+              </div>
+            </div>
+            
+            <div className="footer-column">
+              <h3 className="footer-title">Services</h3>
+              <ul className="footer-links">
+                <li><Link to="/legal-consultation">Legal Consultation</Link></li>
+                <li><Link to="/case-management">Case Management</Link></li>
+                <li><Link to="/document-assistance">Document Assistance</Link></li>
+                <li><Link to="/legal-education">Legal Education</Link></li>
+                <li><Link to="/legal-chatbot">AI Legal Assistant</Link></li>
+              </ul>
+            </div>
+            
+            <div className="footer-column">
+              <h3 className="footer-title">Resources</h3>
+              <ul className="footer-links">
+                <li><Link to="/legal-guides">Legal Guides</Link></li>
+                <li><Link to="/document-templates">Document Templates</Link></li>
+                <li><Link to="/faqs">FAQs</Link></li>
+                <li><Link to="/blog">Legal Blog</Link></li>
+                <li><Link to="/glossary">Legal Glossary</Link></li>
+              </ul>
+            </div>
+            
+            <div className="footer-column">
+              <h3 className="footer-title">Contact Us</h3>
+              <ul className="footer-contact">
+                <li>
+                  <span className="contact-icon">📍</span>
+                  <span>123 Justice Avenue, Legal District, Delhi 110001</span>
+                </li>
+                <li>
+                  <span className="contact-icon">📞</span>
+                  <a href="tel:+1800LEGALASSIST">1-800-LEGAL-ASSIST</a>
+                </li>
+                <li>
+                  <span className="contact-icon">✉️</span>
+                  <a href="mailto:info@legalassist.com">info@legalassist.com</a>
+                </li>
+                <li>
+                  <span className="contact-icon">⏰</span>
+                  <span>Mon-Fri: 9AM-6PM, Sat: 10AM-2PM</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="copyright">
-          <p>&copy; 2025 LegalAssist. All rights reserved.</p>
+      </div>
+      
+      <div className="footer-bottom">
+        <div className="footer-container">
+          <p className="copyright">
+            &copy; {new Date().getFullYear()} LegalAssist. All rights reserved.
+          </p>
+          <div className="footer-bottom-links">
+            <Link to="/terms">Terms of Service</Link>
+            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/accessibility">Accessibility</Link>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,215 +1,389 @@
-/* UserProfile.css */
+/* Legal Assist - Premium User Profile Styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap');
+
+.user-profile-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #F8F9FA, #EDF2F7);
+  font-family: 'Nunito Sans', sans-serif;
+  color: #1E2A3B;
+}
 
 .user-profile-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 24px 16px;
-    background-color: #F7FAFC;
-    min-height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 30px;
+}
+
+/* Common Card Styles */
+.user-profile-card,
+.user-profile-requests-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(10, 36, 99, 0.08);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-profile-card::before,
+.user-profile-requests-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+}
+
+.user-profile-card::before {
+  background: linear-gradient(90deg, #0A2463, #15B097);
+}
+
+.user-profile-requests-card::before {
+  background: linear-gradient(90deg, #0A2463, #FF6B6B);
+}
+
+.user-profile-card:hover,
+.user-profile-requests-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(10, 36, 99, 0.12);
+}
+
+/* Profile Header */
+.user-profile-header {
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(10, 36, 99, 0.08);
+  padding-bottom: 20px;
+}
+
+.user-profile-header h1 {
+  color: #091540;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.user-profile-subtitle {
+  color: rgba(30, 42, 59, 0.7);
+  font-size: 16px;
+}
+
+/* Profile Details */
+.user-profile-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.user-profile-detail-item {
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid rgba(10, 36, 99, 0.05);
+  transition: all 0.3s ease;
+}
+
+.user-profile-detail-item:hover {
+  background: rgba(248, 249, 250, 1);
+  border-color: rgba(10, 36, 99, 0.1);
+  box-shadow: 0 4px 12px rgba(10, 36, 99, 0.05);
+}
+
+.user-profile-detail-item h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(10, 36, 99, 0.6);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.user-profile-detail-item p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #091540;
+  margin: 0;
+}
+
+/* Action Buttons */
+.user-profile-action {
+  margin-top: 20px;
+}
+
+.user-profile-find-lawyer-btn {
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #0A2463, #091540);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 15px rgba(10, 36, 99, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.user-profile-find-lawyer-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(10, 36, 99, 0.3);
+}
+
+/* Lawyer Search Section */
+.user-profile-lawyer-search {
+  margin-top: 24px;
+  border-top: 1px solid rgba(10, 36, 99, 0.08);
+  padding-top: 24px;
+}
+
+/* Requests Section */
+.user-profile-requests-header {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(10, 36, 99, 0.08);
+  padding-bottom: 16px;
+}
+
+.user-profile-requests-header h2 {
+  color: #091540;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
+}
+
+.user-profile-requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.user-profile-request-item {
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid rgba(10, 36, 99, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.user-profile-request-item:hover {
+  background: rgba(248, 249, 250, 1);
+  border-color: rgba(21, 176, 151, 0.3);
+  box-shadow: 0 6px 16px rgba(10, 36, 99, 0.08);
+  transform: translateY(-3px);
+}
+
+.user-profile-request-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-profile-request-info h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #091540;
+  margin: 0 0 8px 0;
+}
+
+.user-profile-lawyer-name {
+  font-size: 15px;
+  margin: 0 0 6px 0;
+  color: rgba(30, 42, 59, 0.8);
+}
+
+.user-profile-status {
+  font-size: 14px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.user-profile-status span {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.user-profile-status-pending {
+  background-color: rgba(255, 209, 102, 0.2);
+  color: #B78103;
+}
+
+.user-profile-status-accepted {
+  background-color: rgba(21, 176, 151, 0.15);
+  color: #15B097;
+}
+
+.user-profile-status-rejected {
+  background-color: rgba(255, 107, 107, 0.15);
+  color: #E23636;
+}
+
+.user-profile-status-completed {
+  background-color: rgba(10, 36, 99, 0.1);
+  color: #0A2463;
+}
+
+.user-profile-view-details-btn {
+  padding: 10px 16px;
+  background: transparent;
+  color: #0A2463;
+  border: 1.5px solid #0A2463;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.user-profile-view-details-btn:hover {
+  background: rgba(10, 36, 99, 0.05);
+  transform: translateY(-2px);
+}
+
+/* No Requests State */
+.user-profile-no-requests {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(248, 249, 250, 0.6);
+  border-radius: 8px;
+  border: 1px dashed rgba(10, 36, 99, 0.15);
+}
+
+.user-profile-no-requests p {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #091540;
+}
+
+.user-profile-hint {
+  color: rgba(30, 42, 59, 0.6);
+  font-size: 15px;
+}
+
+/* Loading States */
+.user-profile-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+  font-size: 16px;
+  color: rgba(10, 36, 99, 0.6);
+  text-align: center;
+}
+
+.user-profile-loading::before {
+  content: '';
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(10, 36, 99, 0.2);
+  border-top-color: #0A2463;
+  border-radius: 50%;
+  margin-right: 12px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
-  
+}
+
+/* Error State */
+.user-profile-error {
+  background: rgba(255, 107, 107, 0.1);
+  border-left: 4px solid #FF6B6B;
+  color: #E23636;
+  padding: 16px 20px;
+  border-radius: 6px;
+  margin: 20px auto;
+  max-width: 600px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-profile-not-found {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(30, 42, 59, 0.7);
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .user-profile-container {
+    grid-template-columns: 1fr;
+    padding: 30px 20px 50px;
+  }
+}
+
+@media (max-width: 768px) {
   .user-profile-card,
   .user-profile-requests-card {
-    background-color: #FFFFFF;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    margin-bottom: 24px;
-    overflow: hidden;
-  }
-  
-  .user-profile-header,
-  .user-profile-requests-header {
-    padding: 24px 24px 16px;
-    border-bottom: 1px solid #EDF2F7;
-  }
-  
-  .user-profile-header h1,
-  .user-profile-requests-header h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    color: #1A365D;
-    margin: 0;
-    font-size: 24px;
-  }
-  
-  .user-profile-subtitle {
-    color: #718096;
-    font-size: 14px;
-    margin-top: 4px;
-    font-family: 'Open Sans', sans-serif;
+    padding: 24px;
   }
   
   .user-profile-details {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
     gap: 16px;
-    padding: 24px;
-  }
-  
-  @media (min-width: 768px) {
-    .user-profile-details {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  .user-profile-detail-item {
-    padding: 12px;
-    border: 1px solid #EDF2F7;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
-  }
-  
-  .user-profile-detail-item:hover {
-    background-color: #F7FAFC;
-  }
-  
-  .user-profile-detail-item h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #2D3748;
-    margin: 0 0 8px 0;
-  }
-  
-  .user-profile-detail-item p {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    color: #1A365D;
-    margin: 0;
-  }
-  
-  .user-profile-action {
-    padding: 0 24px 24px;
-  }
-  
-  .user-profile-find-lawyer-btn {
-    background-color: #2C7A7B;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 12px 20px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .user-profile-find-lawyer-btn:hover {
-    background-color: #1A365D;
-  }
-  
-  .user-profile-lawyer-search {
-    padding: 24px;
-    border-top: 1px solid #EDF2F7;
-  }
-  
-  .user-profile-requests-list {
-    padding: 16px 24px 24px;
-  }
-  
-  .user-profile-request-item {
-    border: 1px solid #E2E8F0;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .user-profile-request-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
   
   .user-profile-request-content {
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
   
-  .user-profile-request-info h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: #1A365D;
-    margin: 0 0 8px 0;
-  }
-  
-  .user-profile-lawyer-name {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    color: #4A5568;
-    margin: 0 0 8px 0;
-  }
-  
-  .user-profile-status {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    color: #4A5568;
-    margin: 0;
-  }
-  
-  .user-profile-status-pending {
-    color: #DD6B20;
-    font-weight: 600;
-  }
-  
-  .user-profile-status-accepted {
-    color: #38A169;
-    font-weight: 600;
-  }
-  
-  .user-profile-status-rejected {
-    color: #E53E3E;
-    font-weight: 600;
+  .user-profile-request-action {
+    width: 100%;
   }
   
   .user-profile-view-details-btn {
-    color: #2C7A7B;
-    background: none;
-    border: 1px solid #2C7A7B;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-profile-card,
+  .user-profile-requests-card {
+    padding: 20px 16px;
   }
   
-  .user-profile-view-details-btn:hover {
-    background-color: #2C7A7B;
-    color: white;
+  .user-profile-header h1 {
+    font-size: 24px;
   }
   
-  .user-profile-loading,
-  .user-profile-error,
-  .user-profile-not-found,
-  .user-profile-no-requests {
-    padding: 32px;
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
+  .user-profile-requests-header h2 {
+    font-size: 20px;
   }
-  
-  .user-profile-loading {
-    color: #2C7A7B;
-  }
-  
-  .user-profile-error {
-    color: #E53E3E;
-  }
-  
-  .user-profile-not-found {
-    color: #718096;
-  }
-  
-  .user-profile-no-requests {
-    color: #718096;
-    padding: 48px 24px;
-  }
-  
-  .user-profile-hint {
-    font-size: 14px;
-    margin-top: 8px;
-    color: #A0AEC0;
-  }
+}

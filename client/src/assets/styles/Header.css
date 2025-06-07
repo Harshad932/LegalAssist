@@ -1,130 +1,359 @@
-header {
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+/* Header.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:wght@400;600&family=Poppins:wght@400;500;600&display=swap');
+
+/* ======= Header Structure ======= */
+.header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.header-scrolled {
+  box-shadow: 0 4px 20px rgba(10, 36, 99, 0.1);
+}
+
+.header-main {
+  background: linear-gradient(to right, #0A2463, #091540);
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ======= Contact Info ======= */
+.header-contact {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-right: 20px;
+}
+
+.header-contact-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.header-contact-link:hover {
+  color: #FFFFFF;
+}
+
+.header-icon {
+  font-size: 14px;
+}
+
+/* ======= Logo Styling ======= */
+.header-logo {
+  position: relative;
+  flex: 1;
+}
+
+.logo-link {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-name {
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-accent {
+  color: #FFD166;
+}
+
+.logo-tagline {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: -2px;
+}
+
+/* ======= Google Translate Styling ======= */
+.header-translate-desktop {
+  margin: 0 24px;
+  min-width: 150px;
+  display: block;
+}
+
+.header-translate-mobile {
+  display: none;
+  width: 100%;
+  margin: 20px 0;
+}
+
+/* Make sure the Google Translate element is visible */
+.google-translate-container {
+  min-width: 150px;
+}
+
+/* Improve visibility of the Google Translate dropdown in the header */
+.goog-te-combo {
+  width: 100%;
+  min-width: 150px;
+  height: 34px;
+  padding: 4px 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  color: #0A2463;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+}
+
+/* ======= Navigation ======= */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 4px;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-text {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-highlight {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #FF6B6B, #FF8E8E);
+  transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 2px;
+}
+
+.nav-button:hover {
+  color: #FFFFFF;
+}
+
+.nav-button:hover .nav-highlight {
+  width: 100%;
+}
+
+/* ======= Action Buttons ======= */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.header-btn-secondary {
+  color: #FFFFFF;
+  background: rgba(21, 176, 151, 0.2);
+  border: 1px solid rgba(21, 176, 151, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.header-btn-secondary:hover {
+  background: rgba(21, 176, 151, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(21, 176, 151, 0.2);
+}
+
+.header-btn-primary {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.header-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+}
+
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.header-btn-primary:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ======= Mobile Menu Toggle ======= */
+.header-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1001;
+}
+
+.mobile-toggle-line {
+  width: 24px;
+  height: 2px;
+  background-color: #FFFFFF;
+  transition: all 0.3s;
+  display: block;
+}
+
+.header-mobile-toggle.active .mobile-toggle-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.header-mobile-toggle.active .mobile-toggle-line:nth-child(2) {
+  opacity: 0;
+}
+
+.header-mobile-toggle.active .mobile-toggle-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ======= Responsive Design ======= */
+@media (max-width: 1140px) {
+  .header-contact {
+    flex-wrap: wrap;
+    gap: 8px;
   }
-  
-  header .home-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  nav {
+}
+
+@media (max-width: 992px) {
+  .header-mobile-toggle {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
   }
   
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #333;
+  .header-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 300px;
+    background: linear-gradient(135deg, #091540, #0A2463);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 80px 30px 30px;
+    transition: right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.25);
+    gap: 30px;
+    overflow-y: auto;
   }
   
-  .logo span {
-    color: #4a6eb5;
+  .nav-active {
+    right: 0;
   }
   
   .nav-links {
-    display: flex;
-    gap: 30px;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
   }
   
-  .nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s;
+  .nav-button {
+    width: 100%;
+    text-align: left;
+    padding: 12px 0;
+    align-items: flex-start;
   }
   
-  .nav-links a:hover {
-    color: #4a6eb5;
-  }
-  
-  .home-btn {
-    background-color: #f5f7fa;
-    color: #4a6eb5;
-    padding: 10px 16px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s;
-    border: none;
-    cursor: pointer;
-    margin-left: 15px;
-  }
-  
-  .home-btn:hover {
-    background-color: #e8ecf4;
-  }
-  
-  .mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  @media (max-width: 920px) {
-    .nav-links {
-      display: none;
-      position: absolute;
-      flex-direction: column;
-      background-color: white;
-      top: 80px;
-      left: 0;
-      right: 0;
-      padding: 20px;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-      z-index: 100;
-    }
-    
-    .nav-links.active {
-      display: flex;
-    }
-    
-    .mobile-menu-btn {
-      display: block;
-    }
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+    align-items: stretch;
   }
 
-  .nav-button {
-    background: none;
-    border: none;
-    color: inherit;
-    cursor: pointer;
-    font-size: inherit;
-    font-family: inherit;
-    padding: 0;
-    margin: 0 15px;
-    text-decoration: none;
+  .header-translate-desktop {
+    display: none;
   }
   
-  .nav-button:hover {
-    color: #4a90e2; /* Or whatever accent color you're using */
-    text-decoration: underline;
+  .header-translate-mobile {
+    display: block;
   }
   
-  @media (max-width: 640px) {
-    nav {
-      flex-wrap: wrap;
-      height: auto;
-      padding: 15px 0;
-    }
-    
-    .logo {
-      margin-right: auto;
-    }
-    
-    .home-btn {
-      margin-top: 10px;
-      margin-left: 0;
-      margin-right: 10px;
-    }
+  .header-btn {
+    width: 100%;
+    padding: 12px 20px;
   }
+}
+
+@media (max-width: 768px) {
+  .logo-name {
+    font-size: 20px;
+  }
+  
+  .logo-tagline {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .header-container {
+    padding: 0 16px;
+  }
+  
+  .logo-icon {
+    font-size: 24px;
+  }
+}

@@ -1,204 +1,493 @@
-/* lawyer-registration.css */
+/* Legal Assist - Premium Lawyer Registration Styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap');
+
+.lawyer-registration-page {
+  min-height: 100vh;
+  background-color: #F8F9FA;
+  display: flex;
+  flex-direction: column;
+}
+
 .lawyer-registration-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #F7FAFC;
-    font-family: 'Open Sans', sans-serif;
-    padding: 40px 20px;
+  display: flex;
+  flex: 1;
+  max-width: 1280px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Sidebar Section */
+.lawyer-registration-sidebar {
+  flex: 0 0 340px;
+  background: linear-gradient(135deg, #0A2463, #091540);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(10, 36, 99, 0.15);
+  margin-right: 40px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.lawyer-registration-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='rgba(255,255,255,.05)' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.3;
+}
+
+.lawyer-registration-sidebar-content {
+  padding: 40px;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.lawyer-registration-sidebar-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 28px;
+  margin-bottom: 16px;
+  line-height: 1.3;
+  color: white;
+}
+
+.lawyer-registration-sidebar-text {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  opacity: 0.9;
+}
+
+.lawyer-registration-accent {
+  color: #FFD166;
+  position: relative;
+}
+
+/* Benefits Section */
+.lawyer-registration-benefits {
+  margin-bottom: 40px;
+}
+
+.lawyer-registration-benefit {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+}
+
+.lawyer-registration-benefit-icon {
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* Testimonial Section */
+.lawyer-registration-testimonial {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  margin-top: 40px;
+}
+
+.lawyer-registration-quote {
+  position: absolute;
+  top: -16px;
+  left: 24px;
+}
+
+.lawyer-registration-testimonial-text {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 16px;
+  padding-top: 8px;
+}
+
+.lawyer-registration-testimonial-author {
+  display: flex;
+  flex-direction: column;
+}
+
+.lawyer-registration-testimonial-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.lawyer-registration-testimonial-role {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* Main Registration Area */
+.lawyer-registration-main {
+  flex: 1;
+}
+
+.lawyer-registration-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  padding: 40px;
+  max-width: 640px;
+}
+
+/* Progress Steps */
+.lawyer-registration-progress {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.lawyer-registration-progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.lawyer-registration-step-indicator {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #F0F2F5;
+  color: #91A3B8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.lawyer-registration-step-indicator.active {
+  background-color: #FF6B6B;
+  color: white;
+}
+
+.lawyer-registration-step-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #1E2A3B;
+}
+
+.lawyer-registration-progress-line {
+  flex: 1;
+  height: 2px;
+  background-color: #F0F2F5;
+  position: relative;
+  z-index: 1;
+  margin: 0 16px;
+  margin-bottom: 32px;
+}
+
+/* Form Header */
+.lawyer-registration-header {
+  margin-bottom: 32px;
+}
+
+.lawyer-registration-heading {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #091540;
+  margin-bottom: 8px;
+}
+
+.lawyer-registration-subtitle {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 16px;
+  color: #5A6B82;
+}
+
+/* Error Messages */
+.lawyer-registration-error {
+  background-color: rgba(255, 76, 76, 0.1);
+  border-left: 3px solid #FF4C4C;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  color: #E42020;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Form Elements */
+.lawyer-registration-form-section {
+  margin-bottom: 32px;
+}
+
+.lawyer-registration-form-row {
+  margin-bottom: 24px;
+}
+
+.lawyer-registration-form-row-split {
+  display: flex;
+  gap: 20px;
+}
+
+.lawyer-registration-input-group {
+  flex: 1;
+}
+
+.lawyer-registration-label {
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #1E2A3B;
+  margin-bottom: 8px;
+}
+
+.lawyer-registration-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #D1D9E6;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  color: #1E2A3B;
+  transition: all 0.3s;
+}
+
+.lawyer-registration-input:focus {
+  outline: none;
+  border-color: #15B097;
+  box-shadow: 0 0 0 3px rgba(21, 176, 151, 0.2);
+}
+
+.lawyer-registration-input-hint {
+  display: block;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px;
+  color: #5A6B82;
+  margin-top: 6px;
+}
+
+/* Form Actions */
+.lawyer-registration-form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lawyer-registration-buttons-row {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.lawyer-registration-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 28px;
+  height: 48px;
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.25);
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.lawyer-registration-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.35);
+}
+
+.lawyer-registration-button:active {
+  transform: translateY(0);
+}
+
+.lawyer-registration-button svg {
+  transition: transform 0.3s;
+}
+
+.lawyer-registration-button:hover svg {
+  transform: translateX(4px);
+}
+
+.lawyer-registration-button-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  height: 48px;
+  background-color: transparent;
+  border: 1px solid #D1D9E6;
+  border-radius: 8px;
+  color: #5A6B82;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  gap: 8px;
+  flex: 1;
+}
+
+.lawyer-registration-button-secondary:hover {
+  background-color: #F5F7FA;
+  border-color: #B0BACB;
+}
+
+.lawyer-registration-button-secondary svg {
+  transition: transform 0.3s;
+}
+
+.lawyer-registration-button-secondary:hover svg {
+  transform: translateX(-4px);
+}
+
+/* Login Link */
+.lawyer-registration-login-link {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  color: #5A6B82;
+  text-align: center;
+}
+
+.lawyer-registration-login-link a {
+  color: #FF6B6B;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.lawyer-registration-login-link a:hover {
+  color: #FF8E8E;
+  text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1024px) {
+  .lawyer-registration-container {
+    flex-direction: column;
+    padding: 0 16px;
+    margin: 20px auto;
+  }
+  
+  .lawyer-registration-sidebar {
+    flex: none;
+    margin-right: 0;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 640px;
+    align-self: center;
+  }
+  
+  .lawyer-registration-main {
+    align-self: center;
+    width: 100%;
+    max-width: 640px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .lawyer-registration-form-row-split {
+    flex-direction: column;
+    gap: 24px;
   }
   
   .lawyer-registration-card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    width: 100%;
-    max-width: 800px;
-    overflow: hidden;
+    padding: 30px 20px;
   }
   
-  .lawyer-registration-header {
-    text-align: center;
-    padding: 30px 40px;
-    border-bottom: 1px solid #E2E8F0;
+  .lawyer-registration-progress-step-label {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .lawyer-registration-sidebar-content {
+    padding: 30px 20px;
   }
   
-  .lawyer-registration-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
+  .lawyer-registration-testimonial {
+    padding: 20px 16px;
   }
   
-  .lawyer-registration-app-name {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    color: #1A365D;
-    margin-left: 12px;
-    font-size: 1.5rem;
+  .lawyer-registration-buttons-row {
+    flex-direction: column;
+  }
+  
+  .lawyer-registration-step-indicator {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
   }
   
   .lawyer-registration-heading {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    color: #1A365D;
-    margin: 0 0 10px 0;
-    font-size: 1.75rem;
+    font-size: 22px;
   }
   
-  .lawyer-registration-subtitle {
-    color: #4A5568;
-    margin: 0;
-    font-size: 1rem;
+  .lawyer-registration-sidebar-title {
+    font-size: 24px;
   }
-  
-  .lawyer-registration-error {
-    background-color: #FED7D7;
-    color: #C53030;
-    padding: 12px 20px;
-    margin: 20px;
-    border-radius: 6px;
-    font-size: 0.875rem;
-  }
-  
-  .lawyer-registration-form {
-    padding: 20px 40px 40px;
-  }
-  
-  .lawyer-registration-form-section {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #EDF2F7;
-  }
-  
-  .lawyer-registration-section-title {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    color: #2C7A7B;
-    margin: 0 0 20px 0;
-    font-size: 1.25rem;
-  }
-  
-  .lawyer-registration-form-row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -10px 15px;
-  }
-  
-  .lawyer-registration-input-group {
-    flex: 1 1 calc(50% - 20px);
-    margin: 0 10px 15px;
-    min-width: 250px;
-  }
-  
-  .lawyer-registration-input-group-full {
-    flex: 1 1 calc(100% - 20px);
-  }
-  
-  .lawyer-registration-label {
-    display: block;
-    color: #2D3748;
-    margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-  
-  .lawyer-registration-input {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #E2E8F0;
-    border-radius: 6px;
-    font-size: 1rem;
-    color: #1A202C;
-    transition: all 0.2s;
-  }
-  
-  .lawyer-registration-input:focus {
-    border-color: #2C7A7B;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.1);
-  }
-  
-  .lawyer-registration-input::placeholder {
-    color: #A0AEC0;
-  }
-  
-  .lawyer-registration-input-hint {
-    display: block;
-    color: #718096;
-    font-size: 0.75rem;
-    margin-top: 5px;
-  }
-  
-  .lawyer-registration-form-actions {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .lawyer-registration-button {
-    background-color: #DD6B20;
-    color: white;
-    font-weight: 600;
-    padding: 14px 30px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    font-size: 1rem;
-    width: 100%;
-    max-width: 300px;
-    text-align: center;
-  }
-  
-  .lawyer-registration-button:hover {
-    background-color: #C05621;
-  }
-  
-  .lawyer-registration-button:disabled {
-    background-color: #ED8936;
-    cursor: not-allowed;
-  }
-  
-  .lawyer-registration-login-link {
-    margin-top: 20px;
-    color: #4A5568;
-    font-size: 0.875rem;
-    text-align: center;
-  }
-  
-  .lawyer-registration-login-link a {
-    color: #2C7A7B;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s;
-  }
-  
-  .lawyer-registration-login-link a:hover {
-    color: #1A365D;
-    text-decoration: underline;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .lawyer-registration-header {
-      padding: 25px 20px;
-    }
-    
-    .lawyer-registration-form {
-      padding: 20px;
-    }
-    
-    .lawyer-registration-form-row {
-      flex-direction: column;
-      margin: 0;
-    }
-    
-    .lawyer-registration-input-group {
-      flex: 1 1 100%;
-      margin: 0 0 15px 0;
-      min-width: 0;
-    }
-  }
+}
+
+/* Adding styles for disabled button state */
+.lawyer-registration-button:disabled {
+  background: linear-gradient(135deg, #B8B8B8, #D0D0D0);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Styles for validation states */
+.lawyer-registration-input.error {
+  border-color: #FF4C4C;
+  box-shadow: 0 0 0 3px rgba(255, 76, 76, 0.1);
+}
+
+.lawyer-registration-input.success {
+  border-color: #15B097;
+  box-shadow: 0 0 0 3px rgba(21, 176, 151, 0.1);
+}
+
+/* Additional styles for better form feedback */
+.lawyer-registration-input-error {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px;
+  color: #E42020;
+  margin-top: 6px;
+}
+
+/* Styles for loading state */
+.lawyer-registration-loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

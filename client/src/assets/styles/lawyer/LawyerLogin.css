@@ -1,142 +1,477 @@
-/* lawyer-login.css */
+/* Lawyer Login Styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:wght@400;600&family=Poppins:wght@400;500;600&display=swap');
+
+.lawyer-app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  font-family: 'Nunito Sans', sans-serif;
+  color: #1E2A3B;
+}
+
+/* Login Container */
 .lawyer-login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #F7FAFC;
-    font-family: 'Open Sans', sans-serif;
-    padding: 20px;
+  padding: 60px 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.lawyer-login-content {
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(10, 36, 99, 0.1);
+  background-color: #FFFFFF;
+  min-height: 600px;
+}
+
+/* Left Column (Form) */
+.lawyer-login-left {
+  flex: 0 0 50%;
+  padding: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lawyer-login-card {
+  width: 100%;
+  height: 100%;
+  padding: 60px 40px;
+}
+
+.lawyer-login-card-inner {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.lawyer-login-form-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.lawyer-login-heading {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: #091540;
+  margin-bottom: 10px;
+}
+
+.lawyer-login-subheading {
+  font-size: 16px;
+  color: #4A5568;
+  line-height: 1.5;
+}
+
+/* Error Message */
+.lawyer-login-error {
+  background-color: rgba(254, 215, 215, 0.5);
+  color: #C53030;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 3px solid #C53030;
+}
+
+.lawyer-login-error svg {
+  flex-shrink: 0;
+}
+
+/* Form Elements */
+.lawyer-login-form {
+  margin-bottom: 30px;
+}
+
+.lawyer-login-input-group {
+  margin-bottom: 24px;
+}
+
+.lawyer-login-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.lawyer-login-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #2D3748;
+}
+
+.lawyer-login-forgot {
+  font-size: 13px;
+  color: #3182CE;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.lawyer-login-forgot:hover {
+  color: #2C5282;
+  text-decoration: underline;
+}
+
+.lawyer-login-input-wrapper {
+  position: relative;
+}
+
+.lawyer-login-input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #718096;
+}
+
+.lawyer-login-input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s;
+  background-color: #F7FAFC;
+  color: #2D3748;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.lawyer-login-input:focus {
+  outline: none;
+  border-color: #3182CE;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+  background-color: #FFFFFF;
+}
+
+.lawyer-login-input::placeholder {
+  color: #A0AEC0;
+}
+
+/* Remember Me Checkbox */
+.lawyer-login-remember {
+  margin-bottom: 24px;
+}
+
+.lawyer-login-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  color: #4A5568;
+}
+
+.lawyer-login-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.lawyer-login-checkbox-mark {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  background-color: #F7FAFC;
+  border: 1px solid #CBD5E0;
+  border-radius: 4px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.lawyer-login-checkbox-mark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.lawyer-login-checkbox input:checked ~ .lawyer-login-checkbox-mark {
+  background-color: #3182CE;
+  border-color: #3182CE;
+}
+
+.lawyer-login-checkbox input:checked ~ .lawyer-login-checkbox-mark:after {
+  display: block;
+}
+
+/* Button */
+.lawyer-login-button {
+  width: 100%;
+  background: linear-gradient(135deg, #0A2463, #091540);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(10, 36, 99, 0.15);
+}
+
+.lawyer-login-button:hover {
+  background: linear-gradient(135deg, #091540, #061030);
+  box-shadow: 0 6px 16px rgba(10, 36, 99, 0.25);
+  transform: translateY(-2px);
+}
+
+.lawyer-login-button svg {
+  transition: transform 0.3s;
+}
+
+.lawyer-login-button:hover svg {
+  transform: translateX(4px);
+}
+
+.lawyer-login-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.lawyer-login-button-loading {
+  justify-content: center;
+}
+
+.lawyer-login-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #FFFFFF;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Footer */
+.lawyer-login-footer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.lawyer-login-footer p {
+  font-size: 14px;
+  color: #4A5568;
+  margin-bottom: 16px;
+}
+
+.lawyer-login-signup-link {
+  color: #3182CE;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.lawyer-login-signup-link:hover {
+  color: #2C5282;
+  text-decoration: underline;
+}
+
+.lawyer-login-security {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #718096;
+  font-size: 13px;
+}
+
+/* Right Column (Features) */
+.lawyer-login-right {
+  flex: 0 0 50%;
+  background: linear-gradient(135deg, #0A2463, #091540);
+  color: white;
+  padding: 60px 40px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.lawyer-login-right:before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+  transform: rotate(45deg);
+}
+
+.lawyer-login-features {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.lawyer-login-features h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.lawyer-login-features h3:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: #FFD166;
+  border-radius: 2px;
+}
+
+.lawyer-login-features-list {
+  margin-bottom: 40px;
+}
+
+.lawyer-login-feature {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.lawyer-login-feature-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFD166;
+}
+
+.lawyer-login-feature-text h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.lawyer-login-feature-text p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+}
+
+.lawyer-login-badge {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lawyer-login-badge-icon {
+  font-size: 24px;
+}
+
+.lawyer-login-badge-text span {
+  font-weight: 600;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.lawyer-login-badge-text p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .lawyer-login-content {
+    flex-direction: column;
+  }
+  
+  .lawyer-login-left,
+  .lawyer-login-right {
+    flex: 0 0 100%;
+  }
+  
+  .lawyer-login-right {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .lawyer-login-container {
+    padding: 20px 16px;
   }
   
   .lawyer-login-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 40px 30px;
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .lawyer-login-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 25px;
-  }
-  
-  .lawyer-login-app-name {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    color: #1A365D;
-    margin-left: 10px;
-    font-size: 1.5rem;
+    padding: 40px 24px;
   }
   
   .lawyer-login-heading {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    color: #1A365D;
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 1.75rem;
+    font-size: 28px;
   }
   
-  .lawyer-login-error {
-    background-color: #FED7D7;
-    color: #C53030;
-    padding: 12px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 0.875rem;
+  .lawyer-login-right {
+    padding: 40px 24px;
   }
-  
-  .lawyer-login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .lawyer-login-input-group {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .lawyer-login-label {
-    color: #2D3748;
-    margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-  
-  .lawyer-login-input {
-    padding: 12px 14px;
-    border: 1px solid #E2E8F0;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.2s;
-  }
-  
-  .lawyer-login-input:focus {
-    border-color: #2C7A7B;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.1);
-  }
-  
-  .lawyer-login-button {
-    background-color: #DD6B20;
-    color: white;
-    font-weight: 600;
-    padding: 12px 20px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-  
-  .lawyer-login-button:hover {
-    background-color: #C05621;
-  }
-  
-  .lawyer-login-button:disabled {
-    background-color: #ED8936;
-    cursor: not-allowed;
-  }
-  
-  .lawyer-login-button-loading {
-    position: relative;
-  }
-  
-  .lawyer-login-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    font-size: 0.875rem;
-  }
-  
-  .lawyer-login-link {
-    color: #2C7A7B;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  
-  .lawyer-login-link:hover {
-    color: #1A365D;
-    text-decoration: underline;
-  }
-  
-  .lawyer-login-separator {
-    margin: 0 10px;
-    color: #A0AEC0;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 480px) {
-    .lawyer-login-card {
-      padding: 30px 20px;
-    }
-  }
+}
+
+/* LawyerHeader Specific Styles */
+.lawyer-header {
+  background: linear-gradient(to right, #0A2463, #091540);
+}
+
+.lawyer-header .user-header-logo-accent {
+  color: #15B097;
+}
+
+.lawyer-header .user-header-tagline {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.lawyer-header .user-header-link-highlight {
+  background: linear-gradient(90deg, #15B097, #0ea18a);
+}
+
+.lawyer-header .user-header-register {
+  background: linear-gradient(135deg, #15B097, #0ea18a);
+  box-shadow: 0 4px 12px rgba(21, 176, 151, 0.3);
+}
+
+.lawyer-header .user-header-register:hover {
+  box-shadow: 0 6px 16px rgba(21, 176, 151, 0.4);
+}

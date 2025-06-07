@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactMarkdown from 'react-markdown';
+import Header from './Header';
 import '../assets/styles/LlamaChat.css';
 
 function LlamaChat3D() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([
-    { role: "bot", text: "Hello! How can I assist you today?" }
+    { role: "bot", text: "Hello! I'm your Legal Assistant AI. How may I help you with your legal questions today?" }
   ]);
   const [loading, setLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
@@ -40,7 +41,7 @@ function LlamaChat3D() {
     recognitionRef.current = recognition;
     
     // Configure speech recognition
-    recognition.continuous = true; // Set to true for uninterrupted listening
+    recognition.continuous = true;
     recognition.interimResults = true;
     recognition.lang = 'en-US';
     
@@ -58,24 +59,15 @@ function LlamaChat3D() {
         }
       }
       
-      // Update input with final transcript if available, otherwise show interim
       if (finalTranscript) {
-        console.log('Final Transcript:', finalTranscript);
         setInput(current => current + finalTranscript + ' ');
-      } else if (interimTranscript && isListening) {
-        console.log('Interim Transcript:', interimTranscript);
-        // Show interim results in real-time (optional)
-        // You could add a separate state for interim results if you want to display them differently
       }
     };
     
     recognition.onend = () => {
-      console.log('Speech recognition ended');
-      // Only restart if we're still supposed to be listening
       if (isListening) {
         try {
           recognition.start();
-          console.log('Restarted speech recognition');
         } catch (error) {
           console.error('Failed to restart speech recognition:', error);
           setIsListening(false);
@@ -85,11 +77,7 @@ function LlamaChat3D() {
     
     recognition.onerror = (event) => {
       console.error('Speech recognition error:', event.error);
-      if (event.error === 'no-speech') {
-        // This is a common error that doesn't need to stop the listening
-        console.log('No speech detected, continuing to listen');
-      } else {
-        // For other errors, we should stop listening
+      if (event.error !== 'no-speech') {
         setIsListening(false);
       }
     };
@@ -103,7 +91,7 @@ function LlamaChat3D() {
         }
       }
     };
-  }, []); // Empty dependency array so it only initializes once
+  }, []);
 
   // Toggle voice recognition
   const toggleListening = () => {
@@ -111,7 +99,6 @@ function LlamaChat3D() {
       if (recognitionRef.current) {
         try {
           recognitionRef.current.stop();
-          console.log('Stopped speech recognition');
         } catch (error) {
           console.error('Failed to stop speech recognition:', error);
         }
@@ -121,11 +108,9 @@ function LlamaChat3D() {
       if (recognitionRef.current) {
         try {
           recognitionRef.current.start();
-          console.log('Started speech recognition');
           setIsListening(true);
         } catch (error) {
           console.error('Failed to start speech recognition:', error);
-          // Provide user feedback about the error
           setMessages(prev => [...prev, { 
             role: "bot", 
             text: "Sorry, there was an issue starting voice recognition. Please check your microphone permissions and try again."
@@ -211,7 +196,7 @@ function LlamaChat3D() {
         ...newMessages, 
         { 
           role: "bot", 
-          text: "Error processing request. Please try again."
+          text: "Error processing request. Please try again or contact our support team for assistance."
         }
       ]);
     }
@@ -236,86 +221,124 @@ function LlamaChat3D() {
   };
 
   return (
-    <div className="llama-chat-container">
-      <div className="llama-chat-main" ref={mainContainerRef}>
-        <div className="llama-chat-header">
-          <h1 className="llama-chat-title">
-            <span className="llama-logo">🦙</span> LlamaChat
-          </h1>
-          <div className="llama-controls">
-            <div className="llama-current-date">{formatDate()}</div>
-          </div>
+    <div className="legal-page">
+      <Header />
+      
+      <div className="legal-page-content">
+        <div className="legal-page-header">
+          <h1>Legal<span className="accent">Assistant</span> AI</h1>
+          <p>Get instant answers to your legal questions from our advanced AI assistant</p>
         </div>
-
-        <div className="llama-chat-messages-area">
-          {messages.map((msg, i) => (
-            <div 
-              key={i}
-              className={`llama-chat-message ${msg.role === "user" ? "llama-message-user" : "llama-message-bot"}`}
-            >
-              <div className="llama-message-avatar">
-                {msg.role === "user" ? "U" : "🦙"}
-              </div>
-              <div className="llama-message-content">
-                <ReactMarkdown>{msg.text}</ReactMarkdown>
+        
+        <div className="legal-chatbot-container">
+          <div className="legal-chatbot-main" ref={mainContainerRef}>
+            <div className="legal-chatbot-header">
+              <h2 className="legal-chatbot-title">
+                <span className="legal-logo">⚖️</span> Legal Assistant
+              </h2>
+              <div className="legal-controls">
+                <div className="legal-current-date">{formatDate()}</div>
               </div>
             </div>
-          ))}
-          {loading && (
-            <div className="llama-chat-message llama-message-bot">
-              <div className="llama-message-avatar">🦙</div>
-              <div className="llama-message-typing">
-                <div className="llama-typing-dot"></div>
-                <div className="llama-typing-dot"></div>
-                <div className="llama-typing-dot"></div>
-              </div>
-            </div>
-          )}
-          <div ref={chatEndRef} className="llama-chat-end-anchor"></div>
-        </div>
 
-        <div className="llama-chat-input-container">
-          <div className="llama-chat-input-wrapper">
-            <textarea
-              ref={textAreaRef}
-              className="llama-chat-textarea"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Message LlamaChat..."
-              disabled={loading}
-              rows="1"
-            />
-            <div className="llama-button-container">
-              <button
-                onClick={toggleListening}
-                className={`llama-voice-button ${isListening ? 'active' : ''}`}
-                aria-label={isListening ? "Stop Voice" : "Start Voice"}
-                title={isListening ? "Stop Voice" : "Start Voice"}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                  <line x1="12" y1="19" x2="12" y2="23"></line>
-                  <line x1="8" y1="23" x2="16" y2="23"></line>
-                </svg>
-              </button>
-              <button
-                onClick={sendMessage}
-                disabled={loading || !input.trim()}
-                className="llama-send-button"
-                aria-label="Send message"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 2L11 13"></path>
-                  <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
-                </svg>
-              </button>
+            <div className="legal-chatbot-messages-area">
+              {messages.map((msg, i) => (
+                <div 
+                  key={i}
+                  className={`legal-chatbot-message ${msg.role === "user" ? "legal-message-user" : "legal-message-bot"}`}
+                >
+                  <div className="legal-message-avatar">
+                    {msg.role === "user" ? 
+                      <div className="user-avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                          <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                      </div> : 
+                      <div className="bot-avatar">⚖️</div>
+                    }
+                  </div>
+                  <div className="legal-message-content">
+                    <div className="message-sender">
+                      {msg.role === "user" ? "You" : "Legal Assistant"}
+                    </div>
+                    <ReactMarkdown>{msg.text}</ReactMarkdown>
+                  </div>
+                </div>
+              ))}
+              {loading && (
+                <div className="legal-chatbot-message legal-message-bot">
+                  <div className="legal-message-avatar">
+                    <div className="bot-avatar">⚖️</div>
+                  </div>
+                  <div className="legal-message-typing">
+                    <div className="legal-typing-dot"></div>
+                    <div className="legal-typing-dot"></div>
+                    <div className="legal-typing-dot"></div>
+                  </div>
+                </div>
+              )}
+              <div ref={chatEndRef} className="legal-chatbot-end-anchor"></div>
+            </div>
+
+            <div className="legal-chatbot-input-container">
+              <div className="legal-chatbot-input-wrapper">
+                <textarea
+                  ref={textAreaRef}
+                  className="legal-chatbot-textarea"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Ask your legal question..."
+                  disabled={loading}
+                  rows="1"
+                />
+                <div className="legal-button-container">
+                  <button
+                    onClick={toggleListening}
+                    className={`legal-voice-button ${isListening ? 'active' : ''}`}
+                    aria-label={isListening ? "Stop Voice" : "Start Voice"}
+                    title={isListening ? "Stop Voice" : "Start Voice"}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                      <line x1="12" y1="19" x2="12" y2="23"></line>
+                      <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                  </button>
+                  <button
+                    onClick={sendMessage}
+                    disabled={loading || !input.trim()}
+                    className="legal-send-button"
+                    aria-label="Send message"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 2L11 13"></path>
+                      <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div className="legal-footer-text">
+                LegalAssist AI provides general information and not legal advice. Always consult with a qualified attorney for specific legal matters.
+              </div>
             </div>
           </div>
-          <div className="llama-footer-text">
-            LlamaChat may produce inaccurate information about people, places, or facts.
-          </div>
+{/*           
+          <div className="legal-chatbot-features">
+            
+            <div className="feature-card">
+              <div className="feature-icon">🔍</div>
+              <h3>Case Lookup</h3>
+              <p>Find relevant case law and legal precedents related to your situation</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">📋</div>
+              <h3>Form Assistance</h3>
+              <p>Get help filling out common legal forms and understanding requirements</p>
+            </div>
+          </div> */}
         </div>
       </div>
     </div>

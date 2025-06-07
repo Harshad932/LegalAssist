@@ -200,12 +200,18 @@ const CaseDetails = () => {
 
   if (!caseData) {
     return (
-      <div className="case-details-container">
+      <div className="case-details-wrapper">
         <div className="case-details-container">
-          <div className="not-found">
+          <div className="case-not-found">
+            <div className="icon-container">
+              <i className="not-found-icon">⚠️</i>
+            </div>
             <h2>Case Not Found</h2>
             <p>No case data is available. Please try searching again.</p>
-            <Link to="/#track-case" className="btn btn-accent">Go Back</Link>
+            <Link to="/#track-case" className="btn btn-primary">
+              <span className="btn-text">Return to Search</span>
+              <span className="btn-icon">←</span>
+            </Link>
           </div>
         </div>
       </div>
@@ -215,87 +221,132 @@ const CaseDetails = () => {
   const nextHearing = getNextHearing();
 
   return (
-    <div className="case-details-container">
+    <div className="case-details-wrapper">
       <div className="case-details-container">
         <div className="case-details-header">
-          <h1>Case Details</h1>
-          <span className={`status-badge ${caseData.status.toLowerCase()}`}>
-            {caseData.status}
-          </span>
+          <div className="page-title-container">
+            <h1 className="page-title">Case Details</h1>
+            <span className={`status-badge ${caseData.status.toLowerCase()}`}>
+              {caseData.status}
+            </span>
+          </div>
+          <div className="action-buttons-top">
+            <button className="btn btn-secondary" ref={printBtnRef}>
+              <span className="btn-icon">📄</span>
+              <span className="btn-text">Download PDF</span>
+            </button>
+          </div>
         </div>
 
         <div className="case-details-card">
-          <h2>{caseData.caseTitle}</h2>
+          <div className="case-title-section">
+            <h2 className="case-title">{caseData.caseTitle}</h2>
+            <div className="case-meta">
+              <span className="case-token">#{caseData.tokenNumber}</span>
+              <span className="case-type">{caseData.caseType}</span>
+            </div>
+          </div>
           
           <div className="case-details-section">
-            <h3>General Information</h3>
+            <div className="section-header">
+              <h3>General Information</h3>
+              <div className="section-divider"></div>
+            </div>
             <div className="details-grid">
               <div className="detail-item">
-                <span className="detail-label">Token Number:</span>
-                <span className="detail-value">{caseData.tokenNumber}</span>
-              </div>
-              <div className="detail-item">
-                <span className="detail-label">Case Type:</span>
-                <span className="detail-value">{caseData.caseType}</span>
-              </div>
-              <div className="detail-item">
-                <span className="detail-label">Filing Date:</span>
+                <span className="detail-label">Filing Date</span>
                 <span className="detail-value">{formatDate(caseData.filingDate)}</span>
               </div>
               <div className="detail-item">
-                <span className="detail-label">Court:</span>
+                <span className="detail-label">Court</span>
                 <span className="detail-value">{caseData.court}</span>
               </div>
               <div className="detail-item">
-                <span className="detail-label">Judge:</span>
+                <span className="detail-label">Judge</span>
                 <span className="detail-value">{caseData.judge}</span>
               </div>
               <div className="detail-item">
-                <span className="detail-label">Priority:</span>
-                <span className="detail-value">{caseData.priority || 'Medium'}</span>
+                <span className="detail-label">Priority</span>
+                <span className="detail-value priority-badge priority-{(caseData.priority || 'medium').toLowerCase()}">
+                  {caseData.priority || 'Medium'}
+                </span>
               </div>
               {caseData.firNumber && (
-                <div className="detail-item">
-                  <span className="detail-label">FIR Number:</span>
-                  <span className="detail-value">{caseData.firNumber}</span>
+                <div className="detail-item detail-item-full">
+                  <span className="detail-label">FIR Number</span>
+                  <span className="detail-value detail-highlight">{caseData.firNumber}</span>
                 </div>
               )}
             </div>
           </div>
 
           <div className="case-details-section">
-            <h3>Parties</h3>
+            <div className="section-header">
+              <h3>Parties</h3>
+              <div className="section-divider"></div>
+            </div>
             <div className="parties-container">
-              <div className="party-item">
-                <h4>Petitioner</h4>
-                <p>{caseData.petitioner}</p>
+              <div className="party-card">
+                <div className="party-icon petitioner-icon">P</div>
+                <div className="party-content">
+                  <h4 className="party-type">Petitioner</h4>
+                  <p className="party-name">{caseData.petitioner}</p>
+                </div>
               </div>
-              <div className="party-item">
-                <h4>Respondent</h4>
-                <p>{caseData.respondent}</p>
+              <div className="party-connector">
+                <div className="connector-line"></div>
+                <div className="connector-vs">VS</div>
+                <div className="connector-line"></div>
+              </div>
+              <div className="party-card">
+                <div className="party-icon respondent-icon">R</div>
+                <div className="party-content">
+                  <h4 className="party-type">Respondent</h4>
+                  <p className="party-name">{caseData.respondent}</p>
+                </div>
               </div>
             </div>
           </div>
 
           {nextHearing && (
-            <div className="case-details-section highlight-section">
-              <h3>Next Hearing</h3>
-              <div className="next-hearing">
-                <p className="hearing-date">
-                  <strong>Date:</strong> {formatDate(nextHearing.date)}
-                </p>
-                <p className="hearing-description">
-                  <strong>Description:</strong> {nextHearing.description}
-                </p>
-                <p className="hearing-status">
-                  <strong>Status:</strong> {nextHearing.status}
-                </p>
+            <div className="case-details-section next-hearing-section">
+              <div className="section-header">
+                <h3>Next Hearing</h3>
+                <div className="section-divider"></div>
+              </div>
+              <div className="next-hearing-card">
+                <div className="next-hearing-date-container">
+                  <div className="hearing-date-card">
+                    <div className="date-month">
+                      {new Date(nextHearing.date).toLocaleDateString('en-US', { month: 'short' })}
+                    </div>
+                    <div className="date-day">
+                      {new Date(nextHearing.date).getDate()}
+                    </div>
+                    <div className="date-year">
+                      {new Date(nextHearing.date).getFullYear()}
+                    </div>
+                  </div>
+                  <div className="hearing-day">
+                    {new Date(nextHearing.date).toLocaleDateString('en-US', { weekday: 'long' })}
+                  </div>
+                </div>
+                <div className="next-hearing-details">
+                  <h4 className="hearing-title">{nextHearing.description}</h4>
+                  <p className="hearing-status">
+                    <span className={`hearing-status-indicator ${nextHearing.status.toLowerCase().replace(/\s+/g, '-')}`}></span>
+                    {nextHearing.status}
+                  </p>
+                </div>
               </div>
             </div>
           )}
 
           <div className="case-details-section">
-            <h3>Hearing History</h3>
+            <div className="section-header">
+              <h3>Hearing History</h3>
+              <div className="section-divider"></div>
+            </div>
             {caseData.hearings && caseData.hearings.length > 0 ? (
               <div className="hearings-timeline">
                 {caseData.hearings
@@ -303,28 +354,56 @@ const CaseDetails = () => {
                   .map((hearing, index) => (
                     <div className="timeline-item" key={index}>
                       <div className="timeline-date">
-                        {formatDate(hearing.date)}
+                        <div className="timeline-date-inner">
+                          <span className="timeline-month">
+                            {new Date(hearing.date).toLocaleDateString('en-US', { month: 'short' })}
+                          </span>
+                          <span className="timeline-day">
+                            {new Date(hearing.date).getDate()}
+                          </span>
+                          <span className="timeline-year">
+                            {new Date(hearing.date).getFullYear()}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="timeline-connector">
+                        <div className="timeline-dot"></div>
+                        <div className="timeline-line"></div>
                       </div>
                       <div className="timeline-content">
-                        <h4>{hearing.description}</h4>
-                        <p className="judge-remarks">
-                          <strong>Judge Remarks:</strong> {hearing.judgeRemarks || 'No remarks provided'}
-                        </p>
-                        <span className={`timeline-status ${hearing.status.toLowerCase().replace(/\s+/g, '-')}`}>
-                          {hearing.status}
-                        </span>
+                        <div className="timeline-header">
+                          <h4 className="timeline-title">{hearing.description}</h4>
+                          <span className={`timeline-status ${hearing.status.toLowerCase().replace(/\s+/g, '-')}`}>
+                            {hearing.status}
+                          </span>
+                        </div>
+                        <div className="timeline-body">
+                          <p className="judge-remarks">
+                            <span className="remarks-label">Judge Remarks:</span>
+                            <span className="remarks-content">{hearing.judgeRemarks || 'No remarks provided'}</span>
+                          </p>
+                        </div>
                       </div>
                     </div>
                   ))}
               </div>
             ) : (
-              <p className="no-hearings">No hearings have been scheduled yet.</p>
+              <div className="no-hearings">
+                <div className="empty-state-icon">📅</div>
+                <p>No hearings have been scheduled yet.</p>
+              </div>
             )}
           </div>
 
           <div className="case-actions">
-            <Link to="/#track-case" className="btn">Go Back</Link>
-            <button className="btn btn-accent" ref={printBtnRef}>Print Details</button>
+            <Link to="/#track-case" className="btn btn-secondary">
+              <span className="btn-icon">←</span>
+              <span className="btn-text">Back to Search</span>
+            </Link>
+            <button className="btn btn-primary" ref={printBtnRef}>
+              <span className="btn-icon">📄</span>
+              <span className="btn-text">Download PDF</span>
+            </button>
           </div>
         </div>
       </div>
