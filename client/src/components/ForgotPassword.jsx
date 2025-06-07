@@ -31,7 +31,7 @@ function ForgotPassword() {
     setTimeout(() => setAnimation(true), 300);
 
     try {
-      const response = await fetch('http://localhost:4000/admin/forgotPassword', {
+      const response = await fetch(`${process.env.BACKEND}/admin/forgotPassword`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -14,7 +14,7 @@ const LawyerMessagesPage = () => {
   const [socket, setSocket] = useState(null);
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
-  const API_URL = 'http://localhost:4000';
+  const API_URL = `${process.env.BACKEND}`;
 
   // Auto-scroll to bottom when messages update
   useEffect(() => {

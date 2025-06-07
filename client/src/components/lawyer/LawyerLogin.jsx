@@ -22,7 +22,7 @@ export default function LawyerLogin() {
     setLoading(true);
     
     try {
-      const response = await axios.post('http://localhost:4000/api/lawyer/auth/login', formData);
+      const response = await axios.post(`${process.env.BACKEND}/api/lawyer/auth/login`, formData);
       
       if (response.data.success) {
         localStorage.setItem('lawyerToken', response.data.token);

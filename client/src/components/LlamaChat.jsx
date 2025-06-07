@@ -171,7 +171,7 @@ function LlamaChat3D() {
 
     try {
       // Send message to backend
-      const res = await fetch("http://localhost:4000/api/chat", {
+      const res = await fetch(`${process.env.BACKEND}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input })

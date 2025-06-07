@@ -50,7 +50,7 @@ const AdminDashboard = () => {
   const fetchCases = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:4000/admin/cases`, { 
+      const response = await axios.get(`${process.env.BACKEND}/admin/cases`, { 
         withCredentials: true 
       });
       setCases(response.data.cases);
@@ -115,7 +115,7 @@ const AdminDashboard = () => {
       setPrioritizing(true);
       showToast(`Prioritizing ${casesToPrioritize} cases...`);
       
-      const response = await axios.post('http://localhost:4000/admin/prioritize-cases', {
+      const response = await axios.post(`${process.env.BACKEND}/admin/prioritize-cases`, {
         numberOfCases: casesToPrioritize
       }, { withCredentials: true });
       
@@ -133,7 +133,7 @@ const AdminDashboard = () => {
   const viewDetails = async (token) => {
     showToast(`Viewing details for Case #${token}`);
     try {
-      const response = await axios.get(`http://localhost:4000/case/${token}`);
+      const response = await axios.get(`${process.env.BACKEND}/case/${token}`);
       navigate("/case-details", { state: { caseData: response.data } });
     } catch (err) {
       console.error("Error fetching case details:", err);

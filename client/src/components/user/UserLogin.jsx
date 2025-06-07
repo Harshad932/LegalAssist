@@ -28,7 +28,7 @@ export default function UserLogin() {
     setError('');
     
     try {
-      const response = await axios.post('http://localhost:4000/api/user/auth/login', formData);
+      const response = await axios.post(`${process.env.BACKEND}/api/user/auth/login`, formData);
       
       if (response.data.success) {
         // Store token and user data

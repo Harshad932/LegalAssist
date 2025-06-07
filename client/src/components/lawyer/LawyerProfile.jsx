@@ -22,13 +22,13 @@ const LawyerProfile = () => {
         const token = localStorage.getItem('lawyerToken');
         
         // Fetch lawyer profile
-        const profileResponse = await axios.get('http://localhost:4000/api/lawyers/me', {
+        const profileResponse = await axios.get(`${process.env.BACKEND}/api/lawyers/me`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setLawyerData(profileResponse.data.data);
 
         // Fetch pending requests
-        const requestsResponse = await axios.get('http://localhost:4000/api/lawyers/my/requests', {
+        const requestsResponse = await axios.get(`${process.env.BACKEND}/api/lawyers/my/requests`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setRequests(requestsResponse.data.data);

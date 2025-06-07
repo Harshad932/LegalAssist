@@ -14,7 +14,7 @@ const AcceptedCases = () => {
     const fetchAcceptedCases = async () => {
       try {
         const token = localStorage.getItem('lawyerToken');
-        const response = await axios.get('http://localhost:4000/api/lawyer/accepted-cases', {
+        const response = await axios.get(`${process.env.BACKEND}/api/lawyer/accepted-cases`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setCases(response.data.data);

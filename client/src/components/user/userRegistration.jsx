@@ -25,7 +25,7 @@ export default function UserRegistration() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:4000/api/user/auth/register', formData);
+      const response = await axios.post(`${process.env.BACKEND}/api/user/auth/register`, formData);
       if (response.data.success) {
         navigate('/user/login');
       }

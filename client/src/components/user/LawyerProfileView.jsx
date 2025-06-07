@@ -30,7 +30,7 @@ const LawyerProfileView = () => {
     const fetchLawyerDetails = async () => {
       try {
         const token = localStorage.getItem('userToken');
-        const response = await axios.get(`http://localhost:4000/api/lawyers/${lawyerId}`, {
+        const response = await axios.get(`${process.env.BACKEND}/api/lawyers/${lawyerId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setLawyer(response.data.data);
@@ -52,7 +52,7 @@ const LawyerProfileView = () => {
       
       const token = localStorage.getItem('userToken');
       await axios.get(
-        `http://localhost:4000/api/user/cases/by-token/${formData.caseToken}`,
+        `${process.env.BACKEND}/api/user/cases/by-token/${formData.caseToken}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -95,7 +95,7 @@ const LawyerProfileView = () => {
       setLoading(prev => ({ ...prev, submission: true }));
       const token = localStorage.getItem('userToken');
       
-      await axios.post('http://localhost:4000/api/case-requests', {
+      await axios.post(`${process.env.BACKEND}/api/case-requests`, {
         lawyerId,
         ...formData
       }, {

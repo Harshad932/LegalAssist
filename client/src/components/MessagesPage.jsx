@@ -13,7 +13,7 @@ const MessagesPage = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
-  const API_URL = 'http://localhost:4000';
+  const API_URL = `${process.env.BACKEND}`;
 
   useEffect(() => {
     const verifyAuth = async () => {

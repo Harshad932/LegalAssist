@@ -38,7 +38,7 @@ const EditCasePage = () => {
     const fetchCase = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:4000/case/${tokenNumber}`);
+        const response = await axios.get(`${process.env.BACKEND}/case/${tokenNumber}`);
         
         // Format date for input field
         const formattedData = {
@@ -151,7 +151,7 @@ const EditCasePage = () => {
     
     try {
       setLoading(true);
-      await axios.put(`http://localhost:4000/admin/case/edit/${tokenNumber}`, caseData);
+      await axios.put(`${process.env.BACKEND}/case/edit/${tokenNumber}`, caseData);
       setLoading(false);
       alert('Case updated successfully');
       navigate('/admin-dashboard');

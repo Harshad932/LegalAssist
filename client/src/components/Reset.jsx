@@ -28,7 +28,7 @@ const ResetPassword = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/admin/reset-password",
+        `${process.env.BACKEND}/admin/reset-password`,
         { token, newPassword }
       );
 

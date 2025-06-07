@@ -72,7 +72,7 @@ const LawyerSearch = () => {
       
       console.log('Sending search params:', cleanedParams); // Debug
       
-      const response = await axios.get('http://localhost:4000/api/lawyers/search', {
+      const response = await axios.get(`${process.env.BACKEND}/api/lawyers/search`, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'

@@ -20,13 +20,13 @@ const UserProfile = () => {
         const token = localStorage.getItem('userToken');
         
         // Fetch user profile
-        const profileResponse = await axios.get('http://localhost:4000/api/users/me', {
+        const profileResponse = await axios.get(`${process.env.BACKEND}/api/users/me`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setUserData(profileResponse.data.data);
 
         // Fetch user's requests
-        const requestsResponse = await axios.get('http://localhost:4000/api/users/requests', {
+        const requestsResponse = await axios.get(`${process.env.BACKEND}/api/users/requests`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setRequests(requestsResponse.data.data);
