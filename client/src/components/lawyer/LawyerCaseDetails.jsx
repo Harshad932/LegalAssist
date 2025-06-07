@@ -16,7 +16,7 @@ const CaseDetails = () => {
     const fetchCaseDetails = async () => {
       try {
         const token = localStorage.getItem('lawyerToken');
-        const response = await axios.get(`${process.env.BACKEND}/api/cases/${caseToken}`, {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/cases/${caseToken}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setCaseData(response.data.data.case);

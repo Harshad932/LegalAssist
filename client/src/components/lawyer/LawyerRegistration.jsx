@@ -40,7 +40,7 @@ export default function LawyerRegistration() {
     setError('');
     
     try {
-      const response = await axios.post(`${process.env.BACKEND}/api/lawyer/auth/register`, formData);
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/lawyer/auth/register`, formData);
       
       if (response.data.success) {
         localStorage.setItem('lawyerToken', response.data.token);

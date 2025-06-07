@@ -19,7 +19,7 @@ const CaseRequestDetails = () => {
         
         // Fetch request details
         const requestResponse = await axios.get(
-          `${process.env.BACKEND}/api/case-requests/${requestId}`,
+          `${process.env.REACT_APP_BACKEND_URL}/api/case-requests/${requestId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setRequest(requestResponse.data.data);
@@ -28,7 +28,7 @@ const CaseRequestDetails = () => {
         // Fetch case details if token exists
         if (requestResponse.data.data.caseToken) {
           const caseResponse = await axios.get(
-            `${process.env.BACKEND}/api/cases/by-token/${requestResponse.data.data.caseToken}`,
+            `${process.env.REACT_APP_BACKEND_URL}/api/cases/by-token/${requestResponse.data.data.caseToken}`,
             { headers: { Authorization: `Bearer ${token}` } }
           );
           setCaseData(caseResponse.data.data);
@@ -49,7 +49,7 @@ const CaseRequestDetails = () => {
       const token = localStorage.getItem('lawyerToken');
       
       await axios.patch(
-        `${process.env.BACKEND}/api/case-requests/${requestId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/case-requests/${requestId}`,
         { status: action },
         { headers: { Authorization: `Bearer ${token}` } }
       );

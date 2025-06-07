@@ -25,7 +25,7 @@ const Home = () => {
     setError('');
 
     try {
-      const response = await axios.get(`${process.env.BACKEND}/case/${token}`);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/case/${token}`);
       setIsLoading(false);
       
       // Navigate to case details page with the data

@@ -32,7 +32,7 @@ const AdminLogin = () => {
     setTimeout(() => setAnimation(true), 300);
 
     try {
-      const response = await fetch(`${process.env.BACKEND}/admin/login`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -13,7 +13,7 @@ const MessagesPage = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
-  const API_URL = `${process.env.BACKEND}`;
+  const API_URL = `${process.env.REACT_APP_BACKEND_URL}`;
 
   useEffect(() => {
     const verifyAuth = async () => {

@@ -28,7 +28,7 @@ const ResetPassword = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.BACKEND}/admin/reset-password`,
+        `${process.env.REACT_APP_BACKEND_URL}/admin/reset-password`,
         { token, newPassword }
       );
 
