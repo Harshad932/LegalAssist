@@ -46,9 +46,13 @@ const transporter = nodemailer.createTransport({
 
 let promptHistory = "";
 
+console.log("✅ Loaded CORS_ORIGIN:", process.env.CORS_ORIGIN);
+
 app.use(cors({
-    origin: '*',
-  }));
+  origin: process.env.CORS_ORIGIN,
+  credentials: true,
+}));
+
   
   app.use(session({
     secret: process.env.SESSION_SECRET,
