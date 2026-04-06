@@ -1,9 +1,12 @@
 // services/prioritizationService.js
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import OpenAI from "openai";
 import dotenv from 'dotenv';
 dotenv.config();
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const client = new OpenAI({
+  apiKey: process.env.GROQ_API_KEY,
+  baseURL: "https://api.groq.com/openai/v1",
+});
 
 export async function analyzeCasePriority(caseText) {
   if (!caseText || typeof caseText !== 'string' || !caseText.trim()) {
@@ -11,15 +14,19 @@ export async function analyzeCasePriority(caseText) {
   }
   
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     
     const prompt = `
     You are a legal expert. Classify this case as 'Critical', 'High', 'Medium', or 'Low' priority based on legal severity, urgency, and harm potential.
-    Respond with ONLY the priority level word.Case details: ${caseText}`;
+    Respond with ONLY the priority level word.
+
+    Case details: ${caseText}`;
     
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const textResponse = response.text().trim().toLowerCase();
+    const response = await client.responses.create({
+      model: "llama-3.1-8b-instant",
+      input: prompt,
+    });
+
+    const textResponse = response.output_text.trim().toLowerCase();
     
     if (textResponse.includes("critical")) return "Critical";
     if (textResponse.includes("high")) return "High";
@@ -28,7 +35,7 @@ export async function analyzeCasePriority(caseText) {
     
     return "Medium"; // Default
   } catch (error) {
-    console.error("Gemini API Error:", error);
+    console.error("Groq API Error:", error);
     
     // Fallback logic
     const text = caseText.toLowerCase();

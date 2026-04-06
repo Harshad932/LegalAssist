@@ -87,3 +87,5 @@ build/
 .vscode/
 .idea/
 *.swp
+
+documentation/

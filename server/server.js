@@ -138,6 +138,7 @@ passport.use(
 app.get("/case/:tokenNumber", async (req, res) => {
     try {
       const caseData = await Case.findOne({ tokenNumber: req.params.tokenNumber });
+      console.log(caseData);
       if (!caseData) {
         return res.status(404).json({ message: "Case not found" });
       }
@@ -288,10 +289,11 @@ app.get("/case/:tokenNumber", async (req, res) => {
         
         // Define models to try in order (fallback strategy)
         const models = [
-          "google/gemini-pro",          // Primary model
-          "anthropic/claude-3-sonnet",  // First fallback
-          "openai/gpt-3.5-turbo"        // Final fallback
-        ];
+      "openai/gpt-oss-20b",      
+      "llama-3.1-8b-instant",           
+      "mixtral-8x7b-32768",           
+      "gemma2-9b-it",               
+    ];
         
         let botResponse = null;
         let lastError = null;
@@ -301,7 +303,7 @@ app.get("/case/:tokenNumber", async (req, res) => {
           try {
             console.log(`Trying model: ${model}`);
             
-            const response = await axios.post("https://openrouter.ai/api/v1/chat/completions", {
+            const response = await axios.post("https://api.groq.com/openai/v1/chat/completions", {
               model: model,
               messages: [
                 { 
@@ -312,11 +314,11 @@ app.get("/case/:tokenNumber", async (req, res) => {
               ],
             }, {
               headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-                "HTTP-Referer": "YOUR_SITE_URL",  // Required by OpenRouter
-                "X-Title": "YOUR_APP_NAME"       // Required by OpenRouter
-              },
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+            "HTTP-Referer": "http://localhost:5000",
+            "X-Title": "Symptom Checker App"
+          },
               timeout: 10000 // 10 seconds timeout
             });
             

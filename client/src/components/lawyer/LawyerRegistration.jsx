@@ -50,7 +50,7 @@ export default function LawyerRegistration() {
           email: response.data.email,
           role: response.data.role
         }));
-        navigate('/lawyer/dashboard');
+        navigate('/lawyer/login');
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
